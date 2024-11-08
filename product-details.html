@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Détails du Produit</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+      <div class="navbar">
+          <div class="logo">
+              <img src="images/logo.jpeg" alt="Logo Matchatcha">
+          </div>
+        <div class="cart-icon">
+            <a href="panier.html">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M7 4h14l-1.5 9h-12l-1.5-9zm0 2l1.1 6h11.8l1.1-6h-14zm3.8 10c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2zm7 0c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2z"></path>
+                </svg>
+                <span id="cart-notification" class="notification-badge">0</span>
+            </a>
+        </div>
+          <div class="hamburger" onclick="toggleMenu()">☰</div>
+          <nav id="nav-links">
+              <a href="index.html">Accueil</a>
+              <a href="matcha.html">Pourquoi le matcha</a>
+              <a href="products.html">Nos Produits</a>
+              <a href="benefits.html">Conseils et Recettes</a>
+              <a href="#contact">Contact</a>
+          </nav>
+      </div>
+  </header>
+
+  <section id="product-details">
+    <h2>Détails du Produit</h2>
+
+    <div id="product-info">
+      <!-- Informations spécifiques au produit -->
+      <img id="product-image" src="" alt="Produit">
+      <h3 id="product-name"></h3>
+      <p id="product-description"></p>
+      <div id="product-additional-info">
+        <p><strong>Détails:</strong> <span id="product-weight"></span></p>
+        <p><strong>Contenant:</strong> <span id="product-container"></span></p>
+      </div>
+      <p><strong>Prix: </strong><span id="product-price"></span></p>
+
+      <form id="product-form">
+        <label for="quantity">Quantité :</label>
+        <select id="quantity" name="quantity" required>
+          <!-- Les options de 1 à 100 seront ajoutées en JavaScript -->
+        </select>
+
+        <button type="submit" id="add-to-cart" class="add-to-cart" disabled>Ajouter au panier</button>
+        <p>
+           Veuillez ajouter la quantité avant de valider l'achat.
+        </p>
+        
+      </form>
+    </div>
+  </section>
+  <section id="related-products">
+    <h3>Vous pourriez également aimer</h3>
+    <div class="related-products-container">
+      <!-- Les produits similaires seront insérés ici via JavaScript -->
+    </div>
+  </section>
+
+  <script>
+    // Fonction pour basculer la visibilité du menu
+    function toggleMenu() {
+      const navLinks = document.getElementById('nav-links');
+      navLinks.classList.toggle('active');
+    }
+
+    // Mise à jour du badge du panier
+    function updateCartNotification() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+      document.getElementById('cart-notification').innerText = totalItems;
+    }
+
+    // Fonction pour mettre à jour le badge du panier
+    function updateCartNotification() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+      document.getElementById('cart-notification').innerText = totalItems;
+    }
+    
+    // Récupération de l'ID du produit dans l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+
+    // Simulation des données produits
+    const products = [
+      { id: 1, name: "Matcha Bio Premium", description: "Matcha bio provenant du Japon. Idéal pour un boost naturel.", price: "30€", image: "matcha-poudre.jpg", weight: "30g", container: "Cup plastique" },
+      { id: 2, name: "Matcha Bio Premium", description: "Matcha bio provenant du Japon. Idéal pour un boost naturel.", price: "30€", image: "matcha-poudre.jpg", weight: "30g", container: "Cup plastique" },
+      { id: 3, name: "Matcha Latte Prêt-à-Boire", description: "Boisson prête à consommer, idéale pour les journées actives.", price: "3.50€", image: "boisson-matcha.jpg", weight: "250ml", container: "Bouteille plastique" },
+      { id: 4, name: "Matcha Latte Prêt-à-Boire", description: "Boisson prête à consommer, idéale pour les journées actives.", price: "3.50€", image: "boisson-matcha.jpg", weight: "250ml", container: "Bouteille plastique" },
+      { id: 5, name: "Fouet à Matcha", description: "Fouet en bambou traditionnel pour une préparation parfaite.", price: "15€", image: "fouet-matcha.jpg", weight: "N/A", container: "Bois" }
+    ];
+
+    // Récupération des détails du produit
+    const product = products.find(p => p.id == productId);
+
+    document.getElementById('product-image').src = product.image;
+    document.getElementById('product-name').innerText = product.name;
+    document.getElementById('product-description').innerText = product.description;
+    document.getElementById('product-price').innerText = product.price;
+    document.getElementById('product-weight').innerText = product.weight;
+    document.getElementById('product-container').innerText = product.container;
+
+    // Remplir le menu déroulant de la quantité avec des options de 1 à 100
+    const quantitySelect = document.getElementById('quantity');
+    for (let i = 1; i <= 100; i++) {
+      const option = document.createElement('option');
+      option.value = i;
+      option.text = i;
+      quantitySelect.appendChild(option);
+    }
+
+    // Activation du bouton "Ajouter au panier" après avoir choisi une quantité
+    quantitySelect.addEventListener('change', () => {
+      document.getElementById('add-to-cart').disabled = quantitySelect.value < 1;
+    });
+
+    // Ajout au panier
+    document.getElementById('product-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const quantity = document.getElementById('quantity').value;
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({ id: product.id, name: product.name, price: product.price, quantity: quantity });
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      alert('Produit ajouté au panier!');
+    });
+    // Sélectionner le conteneur des produits similaires
+    const relatedProductsContainer = document.querySelector('.related-products-container');
+
+    // Exclure le produit actuellement affiché
+    const relatedProducts = products.filter(p => p.id != productId);
+
+    // Générer les éléments des produits similaires
+    relatedProducts.forEach((item) => {
+      const productItem = document.createElement('div');
+      productItem.classList.add('related-product');
+      productItem.innerHTML = `
+        <img src="${item.image}" alt="${item.name}">
+        <h4>${item.name}</h4>
+        <p>${item.price}</p>
+        <button class="view-product-btn" onclick="window.location.href='product-details.html?id=${item.id}'">Voir le produit</button>
+      `;
+      relatedProductsContainer.appendChild(productItem);
+    });
+
+  </script>
+</body>
+</html>

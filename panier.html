@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Barre de Navigation -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="images/logo.jpeg" alt="Logo Matchatcha">
+            </div>
+            <div class="cart-icon">
+                <a href="panier.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M7 4h14l-1.5 9h-12l-1.5-9zm0 2l1.1 6h11.8l1.1-6h-14zm3.8 10c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2zm7 0c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2z"></path>
+                    </svg>
+                    <span id="cart-notification" class="notification-badge">0</span>
+                </a>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
+            <nav id="nav-links">
+                <a href="index.html">Accueil</a>
+                <a href="matcha.html">Pourquoi le matcha</a>
+                <a href="products.html">Nos Produits</a>
+                <a href="benefits.html">Conseils et Recettes</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Section Panier -->
+    <section class="cart">
+        <h2>Votre Panier</h2>
+        <div id="cart-items"></div>
+        <div id="total-price"></div>
+
+        <div id="empty-cart-message">
+            <p>Votre panier est vide. Ajoutez des articles pour commencer.</p>
+            <a href="products.html">
+                <button id="add-products-btn">Ajouter des articles</button>
+            </a>
+        </div>
+
+        <button id="checkout">Passer à la caisse</button>
+    </section>
+
+    <script>
+        // Fonction pour basculer la visibilité du menu
+        function toggleMenu() {
+          const navLinks = document.getElementById('nav-links');
+          navLinks.classList.toggle('active');
+        }
+
+        // Récupérer le panier du localStorage, ou un tableau vide si rien n'est trouvé
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        const cartItemsContainer = document.getElementById('cart-items');
+        const totalPriceContainer = document.getElementById('total-price');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+        const cartNotification = document.getElementById('cart-notification');
+
+        // Mettre à jour l'affichage du panier
+        function updateCartDisplay() {
+            if (cart.length === 0) {
+                emptyCartMessage.style.display = 'block';
+                cartItemsContainer.style.display = 'none';
+            } else {
+                emptyCartMessage.style.display = 'none';
+                cartItemsContainer.style.display = 'block';
+
+                // Affichage des articles dans le panier
+                cartItemsContainer.innerHTML = ''; // Réinitialise le contenu
+                cart.forEach((item, index) => {
+                    const itemElement = document.createElement('div');
+                    itemElement.classList.add('cart-item');
+                    itemElement.innerHTML = `
+                        <div class="remove-item" onclick="removeItem(${index})">×</div>
+                        <div class="item-image">
+                            <img src="${item.image}" alt="${item.name}">
+                        </div>
+                        <div class="item-details">
+                            <h4>${item.name}</h4>
+                            <p>${item.description}</p>
+                        </div>
+                        <div class="item-quantity-price">
+                            <p>Quantité: ${item.quantity}</p>
+                            <p>${item.price}€</p>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemElement);
+                });
+
+                // Calculer le total du panier
+                const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+                totalPriceContainer.innerHTML = `Total: ${totalPrice.toFixed(2)}€`;
+            }
+
+            // Mettre à jour la notification du panier avec le nombre d'articles
+            updateCartNotification();
+        }
+
+        // Mettre à jour la notification du panier
+        function updateCartNotification() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartNotification.textContent = totalItems;
+        }
+
+        // Fonction pour ajouter un produit au panier
+        function addToCart(product) {
+            const existingItem = cart.find(item => item.id === product.id);
+
+            if (existingItem) {
+                existingItem.quantity += 1; // Augmenter la quantité
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart)); // Mettre à jour le localStorage
+            updateCartDisplay(); // Rafraîchir l'affichage du panier
+        }
+
+        // Fonction pour supprimer un article du panier
+        function removeItem(index) {
+            cart.splice(index, 1); // Supprimer l'article du tableau
+            localStorage.setItem('cart', JSON.stringify(cart)); // Mettre à jour le localStorage
+            updateCartDisplay(); // Rafraîchir l'affichage du panier
+        }
+
+        // Fonction pour passer à la caisse
+        document.getElementById('checkout').addEventListener('click', () => {
+            window.location.href = 'checkout.html';
+        });
+
+        // Initialiser l'affichage du panier lors du chargement de la page
+        updateCartDisplay();
+    </script>
+</body>
+</html>
+

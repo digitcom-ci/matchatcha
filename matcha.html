@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pourquoi le Matcha ?</title>
+    <style>
+        /* CSS intégré ici */
+
+        /* Barre de Navigation */
+        header {
+            background-color: #fff;
+            padding: 0.5em 1em;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .logo img {
+            height: 40px; /* Ajuste la taille selon tes préférences */
+        }
+
+
+        .hamburger {
+            font-size: 1.5em;
+            cursor: pointer;
+            display: none;
+            color: #688F4E;
+
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5em;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Menu Hamburger pour Mobile */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                background-color: #2B463C;
+                width: 100%;
+                padding: 1em 0;
+            }
+
+            nav a {
+                padding: 0.5em 1em;
+                text-align: center;
+                display: block;
+            }
+
+            nav.active {
+                display: flex;
+            }
+        }
+
+
+        /* Global Styles */
+        body {
+            font-family: Sifonn;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #F4F1E9;
+        }
+
+        h1 {
+            color: #fff;
+            text-align: center;
+        }
+
+        h2, h3 {
+            color: #688F4E;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        /* Icône du panier */
+        .cart-icon {
+            margin-left: 140px;
+            cursor: pointer;
+            height: 20px;
+        }
+
+        /* Optionnel: Style pour le panier au survol */
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* Changer la couleur de l'icône du panier */
+        .cart-icon svg path {
+            fill: #688F4E; /* Couleur de l'icône du panier (vert) */
+        }
+
+        /* Optionnel: Style pour le panier au survol */
+        .cart-icon:hover svg path {
+            fill: #2B464C; /* Couleur plus foncée au survol (vert plus foncé) */
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -1px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            padding: 1px 7px;
+            font-size: 15px;
+            border-radius: 50%;
+            display: inline-block;
+            min-width: 2px;
+            text-align: center;
+            margin-right: 45px;
+            margin-top: 7px;
+        }
+        
+        /* Style pour la section "Pourquoi le Matcha ?" */
+        .why {
+            background-color: #ffffff;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .why h1 {
+            color: #333;
+        }
+
+        /* Style pour les sections des bienfaits */
+        #benefits {
+            padding: 30px;
+            background-color: #fff;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .benefit-item .icon {
+            margin-right: 20px;
+        }
+
+        .benefit-item img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .benefit-item .text h3 {
+            margin: 0;
+            color: #333;
+        }
+
+        .benefit-item .text p {
+            color: #666;
+        }
+
+        /* Style pour l'infographie */
+        #infographic {
+            padding: 30px;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        #infographic img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+          <div class="navbar">
+              <div class="logo">
+                  <img src="images/logo.jpeg" alt="Logo Matchatcha">
+              </div>
+            <div class="cart-icon">
+                <a href="panier.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M7 4h14l-1.5 9h-12l-1.5-9zm0 2l1.1 6h11.8l1.1-6h-14zm3.8 10c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2zm7 0c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2z"></path>
+                    </svg>
+                    <span id="cart-notification" class="notification-badge">0</span>
+                </a>
+            </div>
+              <div class="hamburger" onclick="toggleMenu()">☰</div>
+              <nav id="nav-links">
+                  <a href="index.html">Accueil</a>
+                  <a href="matcha.html">Pourquoi le matcha</a>
+                  <a href="products.html">Nos Produits</a>
+                  <a href="benefits.html">Conseils et Recettes</a>
+                  <a href="#contact">Contact</a>
+              </nav>
+          </div>
+      </header>
+
+    <section class="why">
+        <h1>Pourquoi le Matcha ?</h1>
+        <p>Découvrez les bienfaits exceptionnels du matcha pour votre bien-être.</p>
+    </section>
+    <section class="intro-video">
+        <video autoplay muted loop playsinline width="100%" height="auto">
+            <source src="images/matcha2.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo HTML5.
+        </video>
+    </section>
+
+    <section id="benefits">
+        <h2>Les Bienfaits du Matcha</h2>
+        <div class="benefit-item">
+            <div class="icon">
+                <img src="energy-icon.png" alt="Énergie naturelle" />
+            </div>
+            <div class="text">
+                <h3>Énergie Naturelle</h3>
+                <p>Le matcha offre une énergie durable grâce à la théanine, sans les pics et les chutes de l'énergie que l'on ressent avec le café.</p>
+            </div>
+        </div>
+        <div class="benefit-item">
+            <div class="icon">
+                <img src="antioxidant-icon.png" alt="Antioxydants" />
+            </div>
+            <div class="text">
+                <h3>Riche en Antioxydants</h3>
+                <p>Le matcha est une source exceptionnelle d'antioxydants, notamment les catéchines, qui aident à lutter contre les radicaux libres et à protéger les cellules.</p>
+            </div>
+        </div>
+        <div class="benefit-item">
+            <div class="icon">
+                <img src="detox-icon.png" alt="Détoxifiant" />
+            </div>
+            <div class="text">
+                <h3>Détoxification</h3>
+                <p>Le matcha aide à détoxifier le corps en éliminant les toxines et en soutenant la digestion grâce à ses propriétés purifiantes.</p>
+            </div>
+        </div>
+        <div class="benefit-item">
+            <div class="icon">
+                <img src="focus-icon.png" alt="Concentration" />
+            </div>
+            <div class="text">
+                <h3>Améliore la Concentration</h3>
+                <p>La théanine, présente dans le matcha, améliore la concentration et la clarté mentale, tout en réduisant le stress.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="infographic">
+        <h2>Le Matcha en un coup d'œil</h2>
+        <div class="infographic-container">
+            <img src="images/matcha.jpeg" alt="Infographie Matcha" />
+        </div>
+    </section>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        let cart = [];
+
+        function addToCart(item, price) {
+            cart.push({ item, price });
+            updateCartNotification();
+        }
+
+        function updateCartNotification() {
+            const cartNotification = document.getElementById('cart-notification');
+            cartNotification.textContent = cart.length;
+        }
+    </script>
+
+</body>
+</html>

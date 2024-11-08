@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogue Matcha</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Barre de Navigation -->
+  <header>
+      <div class="navbar">
+          <div class="logo">
+              <img src="images/logo.jpeg" alt="Logo Matchatcha">
+          </div>
+          <div class="cart-icon">
+              <a href="panier.html">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                      <path d="M7 4h14l-1.5 9h-12l-1.5-9zm0 2l1.1 6h11.8l1.1-6h-14zm3.8 10c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2zm7 0c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2z"></path>
+                  </svg>
+                  <span id="cart-notification" class="notification-badge">0</span>
+              </a>
+          </div>
+          <div class="hamburger" onclick="toggleMenu()">☰</div>
+          <nav id="nav-links">
+              <a href="index.html">Accueil</a>
+              <a href="matcha.htlm">Pourquoi le matcha</a>
+              <a href="products.html">Nos Produits</a>
+              <a href="benefits.html">Conseils et Recettes</a>
+              <a href="#contact">Contact</a>
+          </nav>
+      </div>
+  </header>
+  <section id="products">
+    <h2>Nos Produits</h2>
+    <div class="category">
+      <div class="products-grid">
+        <div class="product-card">
+          <img src="matcha-poudre.jpg" alt="Matcha Poudre">
+          <h4>Matcha Bio Premium</h4>
+          <p>Description : Matcha bio provenant du Japon. Idéal pour un boost naturel.</p>
+          <p><strong>Prix:</strong> 30€</p>
+          <button class="view-product" onclick="window.location.href='product-details.html?id=1'">Voir le produit</button>
+          <div class="product-details">
+              <p><strong>Détails:</strong> 30g</p>
+              <p><strong>Contenant:</strong> boite plastique</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="matcha-poudre.jpg" alt="Matcha Poudre">
+          <h4>Matcha Bio Premium</h4>
+          <p>Description : Matcha bio provenant du Japon. Idéal pour un boost naturel.</p>
+          <p><strong>Prix:</strong> 30€</p>
+          <button class="view-product" onclick="window.location.href='product-details.html?id=2'">Voir le produit</button>
+          <div class="product-details">
+              <p><strong>Détails:</strong> 30g</p>
+              <p><strong>Contenant:</strong> boite plastique</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="boisson-matcha.jpg" alt="Boisson Matcha">
+          <h4>Matcha Latte Prêt-à-Boire</h4>
+          <p>Description : Boisson prête à consommer, idéale pour les journées actives.</p>
+          <p><strong>Prix:</strong> 3.50€</p>
+          <button class="view-product" onclick="window.location.href='product-details.html?id=3'">Voir le produit</button>
+          <div class="product-details">
+              <p><strong>Détails:</strong> 30g</p>
+              <p><strong>Contenant:</strong> boite plastique</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="boisson-matcha.jpg" alt="Boisson Matcha">
+          <h4>Matcha Latte Prêt-à-Boire</h4>
+          <p>Description : Boisson prête à consommer, idéale pour les journées actives.</p>
+          <p><strong>Prix:</strong> 3.50€</p>
+          <button class="view-product" onclick="window.location.href='product-details.html?id=4'">Voir le produit</button>
+          <div class="product-details">
+              <p><strong>Détails:</strong> 30g</p>
+              <p><strong>Contenant:</strong> boite plastique</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="fouet-matcha.jpg" alt="Fouet à Matcha">
+          <h4>Fouet à Matcha</h4>
+          <p>Description : Fouet en bambou traditionnel pour une préparation parfaite.</p>
+          <p><strong>Prix:</strong> 15€</p>
+          <button class="view-product" onclick="window.location.href='product-details.html?id=5'">Voir le produit</button>
+          <div class="product-details">
+              <p><strong>Détails:</strong> 30g</p>
+              <p><strong>Contenant:</strong> boite plastique</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Fonction pour basculer la visibilité du menu
+    function toggleMenu() {
+      const navLinks = document.getElementById('nav-links');
+      navLinks.classList.toggle('active');
+    }
+
+    // Mise à jour du badge du panier
+    function updateCartNotification() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+      document.getElementById('cart-notification').innerText = totalItems;
+    }
+    
+    // Fonction pour mettre à jour le badge du panier
+    function updateCartNotification() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+      document.getElementById('cart-notification').innerText = totalItems;
+    }
+
+    window.onload = updateCartNotification;
+  </script>
+</body>
+</html>
