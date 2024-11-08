@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - Clean Girl</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+      <div class="logo">Clean Girls</div>
+      <nav>
+          <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+          <ul class="nav-menu">
+              <li><a href="accueil.html">Accueil</a></li>
+              <li><a href="routine.html">Routine Journalière</a></li>
+              <li><a href="suivi.html">Suivi de Progrès</a></li>
+              <li><a href="blog.html">Blog</a></li>
+              <li><a href="#" onclick="logout()">Déconnexion</a></li>
+          </ul>
+      </nav>
+  </header>
+  
+  <main>
+  <section class:"blog">
+    <h1>Blog Clean Girl</h1>
+    <input type="text" id="searchBar" placeholder="Rechercher des articles..." onkeyup="searchArticles()">
+    <div id="categories">
+      <button onclick="filterByCategory('Conseils')">Conseils</button>
+      <button onclick="filterByCategory('Astuces de Beauté')">Astuces de Beauté</button>
+      <button onclick="filterByCategory('Habitudes')">Habitudes</button>
+      <button onclick="filterByCategory('Philosophie')">Philosophie</button>
+    </div>
+
+
+    <main id="articles">
+      <article class="article">
+        <h2 class="article-title"> Adopter le Mode de Vie "Clean Girl" : 5 Conseils Essentiels </h2>
+        <p class="article-content">Le mode de vie "Clean Girl" est bien plus qu'une simple tendance ; c'est une approche holistique qui privilégie le bien-être, la simplicité et l'authenticité.</p>
+        <button class="article-link" onclick="location.href='article1.html';">Lire l'article</button>
+      </article>
+      
+      <article class="article">
+        <h2 class="article-title"><a href="article2.html">Astuces de Beauté Clean Girl</a></h2>
+        <p class="article-content">Des astuces de beauté pour un look frais et naturel.</p>
+      </article>
+      <article class="article">
+        <h2 class="article-title"><a href="article3.html">Habitudes à adopter pour un style de vie Clean Girl</a></h2>
+        <p class="article-content">Adoptez ces habitudes pour vous sentir mieux chaque jour.</p>
+      </article>
+      <article class="article">
+        <h2 class="article-title"><a href="article4.html">La philosophie derrière le Clean Girl</a></h2>
+        <p class="article-content">Comprenez la philosophie et l'approche du Clean Girl.</p>
+      </article>
+      <!-- Ajoutez d'autres articles ici -->
+    </main>
+
+    <template id="articleTemplate">
+      <article class="article">
+        <h2 class="article-title"></h2>
+        <p class="article-content"></p>
+        <!-- Lien vers la page de détail de l'article -->
+        <a href="#" class="article-link">Voir l'article</a>
+      </article>
+    </template>
+  
+  </section>
+  </main>
+
+  <footer>
+      <p>&copy; 2024 Clean Girls. Tous droits réservés.</p>
+  </footer>
+  
+  <script>
+    // Fonction pour afficher/masquer le menu
+    function toggleMenu() {
+        const menu = document.querySelector('.nav-menu');
+        menu.classList.toggle('active'); // Ajoute ou enlève la classe active pour afficher/masquer le menu
+    }
+
+    // Fonction de déconnexion
+    function logout() {
+      // Effacer les informations de session
+      // Dans ce cas, vous pouvez également rediriger vers une page d'index ou de connexion
+      alert("Déconnexion réussie !");
+      // Redirige vers la page index (remplacer 'index.html' par le nom de votre page d'index)
+      window.location.href = 'index.html'; // Assurez-vous que cette page existe
+    }
+    
+    // Fonction pour rechercher des articles
+    function searchArticles() {
+      const query = document.getElementById("searchBar").value.toLowerCase();
+      const articles = document.querySelectorAll(".article");
+
+      articles.forEach(article => {
+        const title = article.querySelector(".article-title").textContent.toLowerCase();
+        const content = article.querySelector(".article-content").textContent.toLowerCase();
+
+        // Affiche ou masque les articles selon la recherche
+        if (title.includes(query) || content.includes(query)) {
+          article.style.display = "block"; // Affiche l'article
+        } else {
+          article.style.display = "none"; // Masque l'article
+        }
+      });
+    }
+
+    // Fonction pour filtrer par catégorie (optionnel)
+    function filterByCategory(category) {
+      const articles = document.querySelectorAll(".article");
+
+      articles.forEach(article => {
+        const title = article.querySelector(".article-title").textContent.toLowerCase();
+
+        // Affiche ou masque les articles selon la catégorie (à adapter selon tes besoins)
+        if (title.includes(category.toLowerCase())) {
+          article.style.display = "block"; // Affiche l'article
+        } else {
+          article.style.display = "none"; // Masque l'article
+        }
+      });
+    }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Routine Journalière</title>
+</head>
+<body>
+    <header>
+        <div class="logo">Clean Girls</div>
+        <nav>
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div> <!-- Icône hamburger -->
+              <ul class="nav-menu">
+                  <li><a href="index.html">Accueil</a></li>
+                  <li><a href="routine.html">Routine Journalière</a>
+                  <li><a href="suivi.html">Suivi de Progrès</a></li>
+                  <li><a href="blog.html">Blog</a></li>
+                  <li><a href="#" onclick="logout()">Déconnexion</a></li>
+              </ul>
+        </div>
+        </nav>
+    </header>
+    <main>
+        <section class="routine">
+            <h1>Routines Journalières</h1>
+            <div class="routine-section">
+                <img src="images/matin.jpeg" alt="Matin">
+                <h2>Routine du Matin</h2>
+                <ul id="morning-routine" class="routine-list">
+                    
+                    <li>
+                        <input type="checkbox" id="wake-up">
+                        <label for="morning-shower"><strong> Douche matinale</strong></label>
+                    </li>
+                        <p>Prends une douche énergisante pour te réveiller. Utilise des produits rafraîchissants (savon à la menthe ou agrumes).</p>
+                    
+                    <li>
+                        <input type="checkbox" id="brush-teeth">
+                        <strong> Brossage des dents</strong> 
+                    </li>
+                    <p>Utilise une brosse à dents électrique et un dentifrice blanchissant.</p>
+                    
+                    <li>
+                        <input type="checkbox" id="pilates"><strong> Pilates (15-20 min)</strong>
+                    </li>
+                    <p>Des mouvements de base pour renforcer ton corps et améliorer ta posture.</p>
+
+                    <li>
+                        <input type="checkbox" id="gua-sha"><strong> Gua Sha</strong>
+                    </li>
+                    <p>Fais un massage du visage pendant 5-10 minutes pour favoriser la circulation et diminuer les gonflements.</p>
+                    
+                    <li>
+                        <input type="checkbox" id="water"><strong> Hydratation</strong>
+                    </li>
+                    <p>Bois un verre d'eau avec du citron pour détoxifier et hydrater ton corps.</p>
+                    
+                    <li>
+                        <input type="checkbox" id="gratitude"><strong> Planning du jour</strong>
+                    </li>
+                    <p>Consacre 5 minutes à noter tes tâches principales de la journée (To-dos).</p>
+
+                    <li>
+                        <input type="checkbox" id="evening-shower"><strong> Affirmations et Gratitude</strong>
+                    </li>
+                    <p>Note 3 affirmations positives et 3 choses pour lesquelles tu es reconnaissante.</p>
+                    
+                    <li>
+                        <input type="checkbox" id="teeth-evening"><strong> Visualisation</strong>
+                    </li>
+                    <p>Prends 5 minutes pour visualiser la version de toi-même que tu souhaites devenir.</p>
+                </ul>
+            </div>
+
+            <div class="routine-section">
+                <img src="images/journée.jpeg" alt="Journée">
+                <h2>Pendant la journée</h2>
+                <ul id="day-routine" class="routine-list">
+                    <li>
+                    <input type="checkbox" id="morning-shower"><strong> Travail sur les projets</strong>
+                    </li>
+                    <p>Consacre au moins 2 heures à tes projets personnels ou professionnels.</p>
+                    
+                    <li>
+                        <input type="checkbox" id="teeth-morning"><strong> Routine “Deep Work” (1-2h)</strong> 
+                    </li>
+                        <p>Bloque des sessions de travail intensif pour avancer sur une tâche importante sans distraction.</p>
+
+                    <li>
+                    <input type="checkbox" id="pilates"><strong> Pause bien-être</strong>
+                    </li>
+                    <p>Fais une pause de 5 minutes toutes les 90 minutes pour t’étirer et respirer profondément.</p>
+                        
+                    <li>
+                    <input type="checkbox" id="gua-sha"> <strong> Suivi des To-dos</strong>
+                    </li>
+                    <p>Après chaque tâche accomplie, prends quelques secondes pour t’en féliciter et passer à la suivante.</p>
+                        
+                    <li>
+                    <input type="checkbox" id="water"><strong> Méditation Respiration (10 min)</strong>
+                    </li>
+                    <p>Une pause pour te recentrer au milieu de la journée.</p>
+                </ul>
+            </div>
+            
+            <div class="routine-section">
+                <img src="images/nuit.jpeg" alt="nuit">
+                <h2>Routine du Soir</h2>
+                <ul id="evening-routine" class="routine-list">
+                    
+                <li>
+                    <input type="checkbox" id="morning-shower"><strong> Douche du soir</strong> 
+                </li>
+                    <p>Prends une douche chaude pour te détendre et bien dormir.</p>
+                    
+                <li>
+                    <input type="checkbox" id="teeth-morning"><strong> Brossage des dents</strong> 
+                </li>
+                    <p>Toujours se brosser les dents avant de dormir.</p>
+
+                <li>
+                    <input type="checkbox" id="pilates"><strong> Pilates doux (10 min)</strong>
+                </li>
+                    <p>Étirements légers ou relaxation musculaire pour détendre ton corps après la journée.</p>
+
+                <li>
+                    <input type="checkbox" id="gua-sha"> <strong> Gua Sha (facultatif)</strong>
+                </li>
+                    <p>Refais un massage du visage pour relaxer tes muscles faciaux et hydrater ta peau.</p>
+
+                <li>
+                    <input type="checkbox" id="water"><strong> Révision des To-dos</strong>
+                </li>
+                    <p>Coche les tâches accomplies, et planifie celles de demain.</p>
+
+                <li>
+                    <input type="checkbox" id="gratitude"><strong> Journal de gratitude</strong>
+                </li>
+                    <p>Écris 3 choses positives qui se sont passées dans la journée.</p>
+
+                <li>
+                    <input type="checkbox" id="evening-shower"><strong> Lecture ou écriture</strong>
+                </li>
+                    <p>Prends 10-15 minutes pour lire quelque chose d'inspirant ou écrire tes pensées.</p>
+                    
+                </ul>
+            </div>
+            
+            <div class="add-routine">
+                <h2>Ajouter Votre Propre Routine</h2>
+                <input type="text" id="new-task" placeholder="Nouvelle tâche...">
+                <select id="time-of-day">
+                    <option value="morning">Matin</option>
+                    <option value="day">Journée</option>
+                    <option value="evening">Soir</option>
+                </select>
+                <button id="add-task">Ajouter</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Clean Girls. Tous droits réservés.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

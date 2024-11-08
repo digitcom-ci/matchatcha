@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi de Progrès</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">Clean Girls</div>
+        <nav>
+            <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+            <ul class="nav-menu">
+                <li><a href="accueil.html">Accueil</a></li>
+                <li><a href="routine.html">Routine Journalière</a></li>
+                <li><a href="suivi.html">Suivi de Progrès</a></li>
+                <li><a href="blog.html"">Blog</a></li>
+                  <li><a href="#" onclick="logout()">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="container">
+            
+            <h1>Suivi de Progrès</h1>
+            <h3>
+               Ici vous verrez votre progression quotidienne en fonction de votre routine journalière.
+            </h3>
+            <p>
+               cliquez sur une date pour commencer. (les case devienne vert lorsque vous avec accomplit votre routine et rouge si vous ne l'avez pas fait)
+            </p>
+            
+            <div class="date-selector">
+                <select id="monthSelector" onchange="generateCalendar()"></select>
+                <select id="yearSelector" onchange="generateCalendar()"></select>
+            </div>
+
+            <div id="calendar" class="calendar"></div>
+
+            <!-- Tracker section, masquée par défaut -->
+            <div class="tracker-section" id="trackerSection" style="display: none;">
+                <h3>Activité quotidienne</h3>
+                <div class="activities" id="activitiesList">
+                    <label><input type="checkbox" class="activity-checkbox"> Réveil à heure fixe (ex: 7h00) </label>
+                    <label><input type="checkbox" class="activity-checkbox"> Skincare </label>
+                    <label><input type="checkbox" class="activity-checkbox"> sport </label>
+                    <label><input type="checkbox" class="activity-checkbox"> meditation </label>
+                    <label><input type="checkbox" class="activity-checkbox"> affirmation positive </label>
+                    <label><input type="checkbox" class="activity-checkbox"> to do </label>
+                    <label><input type="checkbox" class="activity-checkbox"> Suivi des objectifs </label>
+                    <label><input type="checkbox" class="activity-checkbox"> Planification hebdomadaire </label>
+                    <label><input type="checkbox" class="activity-checkbox"> Lecture quotidienne </label>
+                    <label><input type="checkbox" class="activity-checkbox"> Déconnexion des écrans (30min avant de dormir) </label>
+                    <label><input type="checkbox" class="activity-checkbox"> Skincare du soir </label>
+                    <label><input type="checkbox" class="activity-checkbox"> Moment de gratitude </label>
+                    <label><input type="checkbox" class="activity-checkbox"> dormir a une heure fixe (voir blog sur le cycle du sommeil) </label>
+                </div>
+                <input type="text" id="activityInput" placeholder="Nom de l'activité...">
+                <button id="addActivityBtn">Ajouter une activité</button>
+
+                <h3>Ajouter une Note</h3>
+                <textarea id="notes" placeholder="Ajoutez une note pour cette journée..."></textarea>
+                <button id="saveBtn">Enregistrer</button>
+                <button id="closeBtn">Fermer</button>
+            </div>
+            
+        </section>
+      </main>
+
+      <script>
+          // Ajouter le code de la fonction toggleMenu ici
+          function toggleMenu() {
+              const navMenu = document.querySelector('.nav-menu');
+              navMenu.classList.toggle('active'); // Ajoute ou enlève la classe active
+          }
+          // Fonction de déconnexion
+          function logout() {
+            // Effacer les informations de session
+            // Dans ce cas, vous pouvez également rediriger vers une page d'index ou de connexion
+            alert("Déconnexion réussie !");
+            // Redirige vers la page index (remplacer 'index.html' par le nom de votre page d'index)
+            window.location.href = 'index.html'; // Assurez-vous que cette page existe
+          }
+          
+        // Variables de date
+        const monthSelector = document.getElementById("monthSelector");
+        const yearSelector = document.getElementById("yearSelector");
+        const calendar = document.getElementById("calendar");
+        const trackerSection = document.getElementById("trackerSection"); // Section du tracker
+        const notesField = document.getElementById("notes");
+        const activitiesList = document.getElementById("activitiesList");
+        let selectedDay = null; // Variable pour garder le jour sélectionné
+
+        // Générer la sélection de mois et d'années
+        const months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+        for (let i = 0; i < months.length; i++) {
+            const option = document.createElement("option");
+            option.value = i;
+            option.textContent = months[i];
+            monthSelector.appendChild(option);
+        }
+
+        const currentYear = new Date().getFullYear();
+        for (let i = currentYear - 5; i <= currentYear + 5; i++) {
+            const option = document.createElement("option");
+            option.value = i;
+            option.textContent = i;
+            yearSelector.appendChild(option);
+        }
+
+        // Initialiser le calendrier
+        function generateCalendar() {
+            const month = parseInt(monthSelector.value);
+            const year = parseInt(yearSelector.value);
+            calendar.innerHTML = "";
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            for (let i = 0; i < firstDay; i++) {
+                const emptyDay = document.createElement("div");
+                calendar.appendChild(emptyDay);
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement("div");
+                dayElement.textContent = day;
+                dayElement.className = "day not-completed";
+                dayElement.addEventListener("click", () => selectDay(dayElement, day));
+                calendar.appendChild(dayElement);
+            }
+        }
+
+        // Sélectionner un jour et afficher le tracker
+        function selectDay(dayElement, day) {
+            selectedDay = day;
+            toggleDayStatus(dayElement); // Changer le statut du jour
+            trackerSection.style.display = "block"; // Afficher la section du tracker
+            loadDayData(); // Charger les données du jour sélectionné
+        }
+
+        // Charger les données du jour depuis localStorage
+        function loadDayData() {
+            const key = `progress_${selectedDay}_${monthSelector.value}_${yearSelector.value}`;
+            const progressData = JSON.parse(localStorage.getItem(key));
+
+            if (progressData) {
+                notesField.value = progressData.notes;
+                const checkboxes = activitiesList.querySelectorAll(".activity-checkbox");
+                checkboxes.forEach((checkbox, index) => {
+                    checkbox.checked = progressData.activities[index] || false;
+                });
+            } else {
+                // Réinitialiser si aucune donnée n'est trouvée
+                notesField.value = "";
+                activitiesList.querySelectorAll(".activity-checkbox").forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+            }
+        }
+
+        // Changer le statut du jour
+        function toggleDayStatus(dayElement) {
+            if (dayElement.classList.contains("not-completed")) {
+                dayElement.classList.remove("not-completed");
+                dayElement.classList.add("completed");
+            } else {
+                dayElement.classList.remove("completed");
+                dayElement.classList.add("not-completed");
+            }
+        }
+
+        // Initialiser avec le mois et l'année actuels
+        monthSelector.value = new Date().getMonth();
+        yearSelector.value = new Date().getFullYear();
+        generateCalendar();
+
+        // Ajouter une activité
+        document.getElementById("addActivityBtn").addEventListener("click", () => {
+            const activityInput = document.getElementById("activityInput");
+            const activityName = activityInput.value.trim();
+
+            if (activityName) {
+                const activityLabel = document.createElement("label");
+                activityLabel.innerHTML = `<input type="checkbox" class="activity-checkbox"> ${activityName}`;
+                activitiesList.appendChild(activityLabel);
+                activityInput.value = ""; // Réinitialiser le champ de saisie
+            } else {
+                alert("Veuillez entrer le nom de l'activité.");
+            }
+        });
+
+        // Sauvegarder la note et le statut des activités
+        document.getElementById("saveBtn").addEventListener("click", () => {
+            const notes = notesField.value;
+            const activities = Array.from(activitiesList.querySelectorAll(".activity-checkbox")).map(input => input.checked);
+
+            const progressData = {
+                day: selectedDay,
+                month: parseInt(monthSelector.value),
+                year: parseInt(yearSelector.value),
+                notes: notes,
+                activities: activities
+            };
+
+            localStorage.setItem(`progress_${progressData.day}_${progressData.month}_${progressData.year}`, JSON.stringify(progressData));
+            alert("Progression sauvegardée !");
+        });
+          // Fermer la section du tracker
+          document.getElementById("closeBtn").addEventListener("click", () => {
+              trackerSection.style.display = "none";
+              notesField.value = ""; // Réinitialiser la note
+              activitiesList.querySelectorAll(".activity-checkbox").forEach(checkbox => {
+                  checkbox.checked = false; // Réinitialiser les cases à cocher
+              });
+              selectedDay = null; // Réinitialiser le jour sélectionné
+          });
+      </script>
+
+</body>
+      <footer>
+        <p>&copy; 2024 Clean Girls. Tous droits réservés.</p>
+      </footer>
+</html>

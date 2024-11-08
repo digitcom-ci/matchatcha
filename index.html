@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Clean Girls</title>
+    <style>
+    .container { display: none; }
+    .container.active { display: block; }
+    input { width: 100%; padding: 10px; margin: 5px 0; }
+    button { width: 100%; padding: 10px; }
+    </style>
+</head>
+<body>
+
+  <header>
+      <div class="logo">Clean Girls</div>
+  </header>
+
+    <main>
+        <section class="intro">
+            <h1>Bienvenue dans l'univers des Clean Girls</h1>
+            <img src="images/cover1.jpeg" alt="Image d'introduction">
+            <p>
+                Découvrez le style de vie Clean Girl, où la simplicité rencontre la sophistication. 
+                Ici, nous vous aiderons à établir des routines quotidiennes qui favorisent le bien-être physique et mental.
+            </p>
+            <p>
+                Rejoignez-nous pour des conseils sur les routines, des astuces de beauté et un suivi de votre progrès personnel.
+            </p>
+            <button id="start-button">Commencer</button>
+
+            <div id="register" class="container active">
+                <h2>Inscription</h2>
+                <input type="email" id="registerEmail" placeholder="Adresse e-mail" required>
+                <input type="text" id="registerUsername" placeholder="Nom d'utilisateur" required>
+                <input type="password" id="registerPassword" placeholder="Mot de passe" required>
+                <button onclick="register()">S'inscrire</button>
+                <p>Déjà un compte ? <a href="#" onclick="toggleForms('login')">Connectez-vous ici</a></p>
+            </div>
+
+            <div id="login" class="container">
+                <h2>Connexion</h2>
+                <input type="text" id="loginUsername" placeholder="Nom d'utilisateur" required>
+                <input type="password" id="loginPassword" placeholder="Mot de passe" required>
+                <button onclick="login()">Se connecter</button>
+                <p>Pas encore inscrit ? <a href="#" onclick="toggleForms('register')">Inscrivez-vous ici</a></p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Fonction pour basculer entre les formulaires d'inscription et de connexion
+        function toggleForms(form) {
+          if (form === 'login') {
+            document.getElementById("register").classList.remove("active");
+            document.getElementById("login").classList.add("active");
+          } else {
+            document.getElementById("login").classList.remove("active");
+            document.getElementById("register").classList.add("active");
+          }
+        }
+
+        // Fonction d'inscription
+        function register() {
+          const email = document.getElementById("registerEmail").value;
+          const username = document.getElementById("registerUsername").value;
+          const password = document.getElementById("registerPassword").value;
+
+          if (email && username && password) {
+            // Vérifier si le nom d'utilisateur existe déjà
+            if (localStorage.getItem(username)) {
+              alert("Nom d'utilisateur déjà pris !");
+              toggleForms('login'); // Bascule vers le formulaire de connexion
+            } else {
+              // Enregistrer les informations sous forme d'objet JSON
+              const user = { email: email, password: password };
+              localStorage.setItem(username, JSON.stringify(user));
+              alert("Inscription réussie !");
+              toggleForms('login'); // Bascule vers le formulaire de connexion après inscription
+            }
+          } else {
+            alert("Veuillez remplir tous les champs.");
+          }
+        }
+
+        // Fonction de connexion
+        function login() {
+          const username = document.getElementById("loginUsername").value;
+          const password = document.getElementById("loginPassword").value;
+
+          // Récupérer les informations de l'utilisateur
+          const user = JSON.parse(localStorage.getItem(username));
+
+          if (user && user.password === password) {
+            alert("Connexion réussie !");
+            window.location.href = 'accueil.html'; // Rediriger vers la page d'accueil après connexion
+          } else {
+            alert("Nom d'utilisateur ou mot de passe incorrect.");
+          }
+        }
+
+    </script>
+</body>
+</html>

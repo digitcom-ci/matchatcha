@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Page d'Accueil</title>
+</head>
+<body>
+    <header>
+          <div class="logo">Clean Girls</div>
+          <nav>
+              <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+              <ul class="nav-menu">
+                  <li><a href="accueil.html">Accueil</a></li>
+                  <li><a href="routine.html">Routine Journalière</a></li>
+                  <li><a href="suivi.html">Suivi de Progrès</a></li>
+                  <li><a href="blog.html">Blog</a></li>
+                  <li><a href="#" onclick="logout()">Déconnexion</a></li>
+              </ul>
+          </nav>
+      </header>
+    
+    <main>
+        <section class="container">
+            <img src="images/acc.jpeg" alt="Image d'accueil">
+            <h1>Bienvenue dans l'univers des Clean Girls</h1>
+            <p>
+                Plongez dans l'univers des Clean Girls, où l'élégance se marie à la simplicité. Ici, nous vous guiderons dans l'élaboration de routines quotidiennes qui nourrissent votre bien-être physique et mental.
+            </p>
+    <div class="container">
+        <h3>Explorez votre routine de vie parfaite et laissez-vous inspirer pour organiser vos journées avec énergie et harmonie en cliquant ici !</h3>
+        <button class="routine" onclick="location.href='routine.html';">Accéder à ma routine</button>
+    </div>
+
+    <div class="article">
+        <h3 class="article-title"> Adopter le Mode de Vie "Clean Girl" : 5 Conseils Essentiels </h3>
+        <p class="article-content">Le mode de vie "Clean Girl" est bien plus qu'une simple tendance ; c'est une approche holistique qui privilégie le bien-être, la simplicité et l'authenticité.</p>
+        <button class="article-link" onclick="location.href='article1.html';">Lire l'article</button>
+    </div>
+        </section>
+    </main>
+    
+    <script>
+        // Fonction pour afficher/masquer le menu
+        function toggleMenu() {
+            const menu = document.querySelector('.nav-menu');
+            menu.classList.toggle('active'); // Ajoute ou enlève la classe active pour afficher/masquer le menu
+        }
+
+        // Fonction de déconnexion
+        function logout() {
+            alert("Déconnexion réussie !");
+            window.location.href = 'index.html'; // Redirige vers la page d'index
+        }
+
+        // Fonction pour afficher un message de bienvenue dans la console
+        function welcomeMessage() {
+            console.log("Bienvenue sur notre site Clean Girl !");
+        }
+
+        // Appeler la fonction de message de bienvenue au chargement de la page
+        window.onload = welcomeMessage;
+
+    </script>
+    
+</body>
+</html>
