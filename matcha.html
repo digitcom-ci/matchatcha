@@ -12,7 +12,7 @@
     <header>
           <div class="navbar">
               <div class="logo">
-                  <img src="https://github.com/digitcom-ci/matchatcha/blob/main/logo.jpeg" alt="Logo Matchatcha">
+                  <img src="logo.jpeg" alt="Logo Matchatcha">
               </div>
 
               <!-- Icône de Connexion/Déconnexion -->
@@ -109,43 +109,40 @@
         </div>
     </section>
     <script>
-         // Fonction pour basculer la visibilité du menu
+          // Fonction pour basculer la visibilité du menu
         function toggleMenu() {
           const navLinks = document.getElementById('nav-links');
           navLinks.classList.toggle('active');
         }
 
-        let cart = [];
-
-        function addToCart(item, price) {
-            cart.push({ item, price });
-            updateCartNotification();
-        }
-
-        function updateCartNotification() {
-            const cartNotification = document.getElementById('cart-notification');
-            cartNotification.textContent = cart.length;
-        }
-
-        // Fonction pour gérer le clic sur l'icône de connexion
-        function handleLoginClick() {
-            const isLoggedIn = localStorage.getItem('loggedInUser');
-            if (isLoggedIn) {
-                const confirmLogout = confirm("Voulez-vous vous déconnecter ?");
-                if (confirmLogout) {
-                    logout();
-                }
-            } else {
-                window.location.href = 'login.html';
+        document.addEventListener("DOMContentLoaded", function() {
+            // Mise à jour du badge du panier
+            function updateCartNotification() {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+                document.getElementById('cart-notification').innerText = totalItems;
             }
-        }
+            updateCartNotification();
 
-        // Fonction de déconnexion
-        function logout() {
-            localStorage.removeItem('loggedInUser');
-            alert("Déconnexion réussie.");
-            window.location.href = 'index.html';
-        }
+            // Fonction pour gérer le clic sur l'icône de connexion
+            function handleLoginClick() {
+                const isLoggedIn = localStorage.getItem('loggedInUser');
+                if (isLoggedIn) {
+                    const confirmLogout = confirm("Voulez-vous vous déconnecter ?");
+                    if (confirmLogout) {
+                        logout();
+                    }
+                } else {
+                    window.location.href = 'login.html';
+                }
+            }
+
+            // Fonction de déconnexion
+            function logout() {
+                localStorage.removeItem('loggedInUser');
+                alert("Déconnexion réussie.");
+                window.location.href = 'index.html';
+            }
         });
         
     </script>
