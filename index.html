@@ -8,6 +8,8 @@
 </head>
 <body>
 
+    <div class="announcement-bar"> <p id="announcement-text">🎉 Livraison gratuite pour toute commande supérieure à 20 000 FCFA ! 🎉 une remise de 10% pour tous nouveaux achat.</p> </div>
+
     <!-- Barre de Navigation -->
     <header>
         <div class="navbar">
@@ -174,6 +176,30 @@
                 window.location.href = 'index.html';
             }
         });
+        // Texte défilant 
+        const announcementText = document.getElementById('announcement-text'); 
+        let scrollSpeed = 2; // Vitesse du défilement 
+        
+        function scrollText() { 
+            announcementText.style.transform = `translateX(${scrollSpeed}px)`; 
+            
+            const currentTransform = parseInt(window.getComputedStyle(announcementText).transform.split(',')[4]) || 0; 
+            const parentWidth = announcementText.parentElement.offsetWidth; 
+            const textWidth = announcementText.offsetWidth; 
+            
+            // Réinitialiser la position si le texte a entièrement défilé 
+            if (currentTransform > parentWidth) { 
+                announcementText.style.transform = `translateX(-${textWidth}px)`; 
+            } else { announcementText.style.transform = `translateX(${currentTransform + scrollSpeed}px)`; 
+            } 
+            requestAnimationFrame(scrollText); 
+        }
+       
+
+        scrollText(); // Démarrer le défilement
+         announcementText.addEventListener('mouseover', () => { scrollSpeed = 0; }); 
+         announcementText.addEventListener('mouseout', () => { scrollSpeed = 2; });
+
     </script>
 
 </body>
