@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscription</title>
+  <style>
+    /* Général */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Sifonn', sans-serif;
+      background-color: #688F4E;
+      color: #333;
+    }
+
+    header {
+      background-color: #fff;
+      color: #688F4E;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 24px;
+      text-align: center;
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 80px); /* Ajuste en fonction de la taille de l'entête */
+    }
+
+    form {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 400px;
+      margin-left: 40px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #688F4E;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2B463C; /* Teinte plus foncée */
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    p {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    /* Style pour le bouton de retour */
+    .back-button {
+        display: inline-flex;
+        align-items: center;
+        color: #2e8b57;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        margin-left: 5px;
+    }
+
+    .back-button svg {
+        margin-right: 3px; /* Espace entre la flèche et le texte */
+        transition: transform 0.3s ease;
+    }
+
+    .back-button:hover svg {
+        transform: translateX(-5px); /* Effet de déplacement de la flèche au survol */
+    }
+
+    .back-button:hover {
+        color: #1f7a43; /* Changer la couleur du texte au survol */
+    }
+
+    #error-message {
+      text-align: center;
+      margin-top: 15px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="javascript:history.back()" class="back-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="feather feather-arrow-left">
+        <path d="M19 12H5"></path>
+        <path d="M12 19l-7-7 7-7"></path>
+      </svg>
+      Retour
+    </a>
+    <h1>Inscription</h1>
+  </header>
+  <main>
+    <div class="signup-form">
+      <form id="register-form">
+        <label for="username">Nom d'utilisateur:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Mot de passe:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="confirm-password">Confirmez le mot de passe:</label>
+        <input type="password" id="confirm-password" name="confirm-password" required>
+
+        <button type="submit">S'inscrire</button>
+      </form>
+
+      <p>Déjà inscrit ? <a href="login.html">Connectez-vous ici</a></p>
+
+      <p id="error-message" style="display: none;">Erreur lors de l'inscription</p>
+    </div>
+  </main>
+
+  <script>
+    // Fonction pour enregistrer un nouvel utilisateur
+    function registerUser(username, email, password) {
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      users.push({ username, email, password });
+      localStorage.setItem('users', JSON.stringify(users));
+    }
+
+    // Soumettre le formulaire d'inscription
+    document.getElementById('register-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+
+      if (password !== confirmPassword) {
+        document.getElementById('error-message').textContent = "Les mots de passe ne correspondent pas.";
+        document.getElementById('error-message').style.display = 'block';
+        return;
+      }
+
+      registerUser(username, email, password);
+      window.location.href = 'login.html';  // Redirige vers la page de connexion
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Découvrez le rituel traditionnel du matcha, ses bienfaits et comment l'intégrer à votre quotidien pour une énergie naturelle et un bien-être optimal.">
+    <title>Le rituel du Matcha : Tradition et Bien-être</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+          <div class="navbar">
+                  <a href="javascript:history.back()" class="back-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="feather feather-arrow-left">
+                          <path d="M19 12H5"></path>
+                          <path d="M12 19l-7-7 7-7"></path>
+                      </svg>
+                      Retour
+                  </a>
+
+              <!-- Icône de Connexion/Déconnexion -->
+              <div class="login-icon">
+                  <a href="login.html" id="login-link">
+                      <!-- SVG de connexion -->
+                      <svg id="icon-connexion" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                          <circle cx="12" cy="8" r="4" fill="#4CAF50"></circle>
+                          <path d="M12 14c-5 0-9 2.5-9 5v1h18v-1c0-2.5-4-5-9-5z" fill="#4CAF50"></path>
+                      </svg>
+                  </a>
+                  <a href="#" id="logout-link" style="display: none;" onclick="logout()">
+                      <!-- SVG de déconnexion -->
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                          <path d="M10 17l5-5h-4v-2h4l-5-5 1.5-1.5 7 7-7 7zM14 3v2h-9v12h9v2h-9c-1.1 0-1.99-.9-1.99-2l-.01-12c0-1.1.89-2 1.99-2h9z"></path>
+                      </svg>
+                  </a>
+              </div>
+              
+            <div class="cart-icon">
+                <a href="panier.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M7 4h14l-1.5 9h-12l-1.5-9zm0 2l1.1 6h11.8l1.1-6h-14zm3.8 10c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2zm7 0c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2z"></path>
+                    </svg>
+                    <span id="cart-notification" class="notification-badge">0</span>
+                </a>
+            </div>
+              <div class="hamburger" onclick="toggleMenu()">☰</div>
+              <nav id="nav-links">
+                  <a href="index.html">Accueil</a>
+                  <a href="matcha.html">Pourquoi le matcha</a>
+                  <a href="products.html">Nos Produits</a>
+                  <a href="benefits.html">Conseils et Recettes</a>
+                  <a href="contact.html">Contact</a>
+              </nav>
+          </div>
+      </header>
+
+    <section class="article-header">
+        <h1>Le rituel du Matcha : Tradition et Bien-être</h1>
+        <p>Publié le 10 novembre 2024</p>
+    </section>
+
+    <section class="article-content">
+        <img src="matcha-ritual.jpg" alt="Rituel du Matcha" />
+        <p>Le matcha est plus qu'une simple boisson, c’est un rituel ancestral qui procure sérénité et énergie...</p>
+
+        <h2>Qu'est-ce que le matcha ?</h2>
+        <p>Le matcha est une poudre fine obtenue à partir des jeunes feuilles de thé vert cultivées à l'ombre...</p>
+
+        <h3>Les Bienfaits du Matcha</h3>
+        <p>Le matcha est riche en antioxydants, en L-théanine, et procure une énergie durable...</p>
+
+        <h3>Comment intégrer le matcha dans votre quotidien ?</h3>
+        <p>Il existe plusieurs façons de consommer le matcha, en infusion, en latte, ou même en dessert...</p>
+
+        <p>Continuez à explorer les bienfaits et la préparation du matcha dans notre blog ou dans notre boutique !</p>
+    </section>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        let cart = [];
+
+        function addToCart(item, price) {
+            cart.push({ item, price });
+            updateCartNotification();
+        }
+
+        function updateCartNotification() {
+            const cartNotification = document.getElementById('cart-notification');
+            cartNotification.textContent = cart.length;
+        }
+
+        // Fonction pour gérer le clic sur l'icône de connexion
+        function handleLoginClick() {
+            const isLoggedIn = localStorage.getItem('loggedInUser');
+            if (isLoggedIn) {
+                const confirmLogout = confirm("Voulez-vous vous déconnecter ?");
+                if (confirmLogout) {
+                    logout();
+                }
+            } else {
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Fonction de déconnexion
+        function logout() {
+            localStorage.removeItem('loggedInUser');
+            alert("Déconnexion réussie.");
+            window.location.href = 'index.html';
+        }
+        });
+    </script>
+
+</body>
+</html>

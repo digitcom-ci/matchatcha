@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pourquoi le Matcha ?</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+
+    <header>
+          <div class="navbar">
+              <div class="logo">
+                  <img src="images/logo.jpeg" alt="Logo Matchatcha">
+              </div>
+
+              <!-- Icône de Connexion/Déconnexion -->
+              <div class="login-icon">
+                  <a href="login.html" id="login-link">
+                      <!-- SVG de connexion -->
+                      <svg id="icon-connexion" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                          <circle cx="12" cy="8" r="4" fill="#4CAF50"></circle>
+                          <path d="M12 14c-5 0-9 2.5-9 5v1h18v-1c0-2.5-4-5-9-5z" fill="#4CAF50"></path>
+                      </svg>
+                  </a>
+                  <a href="#" id="logout-link" style="display: none;" onclick="logout()">
+                      <!-- SVG de déconnexion -->
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                          <path d="M10 17l5-5h-4v-2h4l-5-5 1.5-1.5 7 7-7 7zM14 3v2h-9v12h9v2h-9c-1.1 0-1.99-.9-1.99-2l-.01-12c0-1.1.89-2 1.99-2h9z"></path>
+                      </svg>
+                  </a>
+              </div>
+              
+            <div class="cart-icon">
+                <a href="panier.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M7 4h14l-1.5 9h-12l-1.5-9zm0 2l1.1 6h11.8l1.1-6h-14zm3.8 10c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2zm7 0c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2z"></path>
+                    </svg>
+                    <span id="cart-notification" class="notification-badge">0</span>
+                </a>
+            </div>
+              <div class="hamburger" onclick="toggleMenu()">☰</div>
+              <nav id="nav-links">
+                  <a href="index.html">Accueil</a>
+                  <a href="matcha.html">Pourquoi le matcha</a>
+                  <a href="products.html">Nos Produits</a>
+                  <a href="benefits.html">Conseils et Recettes</a>
+                  <a href="contact.html">Contact</a>
+              </nav>
+          </div>
+      </header>
+
+    <section class="why">
+        <h1>Pourquoi le Matcha ?</h1>
+        <p>Découvrez les bienfaits exceptionnels du matcha pour votre bien-être.</p>
+    </section>
+    <section class="intro-video">
+        <video autoplay muted loop playsinline width="100%" height="auto">
+            <source src="images/matcha2.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo HTML5.
+        </video>
+    </section>
+
+    <section id="benefits">
+        <h2>Les Bienfaits du Matcha</h2>
+        <div class="benefit-item">
+            <div class="icon">
+                <img src="energy-icon.png" alt="Énergie naturelle" />
+            </div>
+            <div class="text">
+                <h3>Énergie Naturelle</h3>
+                <p>Le matcha offre une énergie durable grâce à la théanine, sans les pics et les chutes de l'énergie que l'on ressent avec le café.</p>
+            </div>
+        </div>
+        <div class="benefit-item">
+            <div class="icon">
+                <img src="antioxidant-icon.png" alt="Antioxydants" />
+            </div>
+            <div class="text">
+                <h3>Riche en Antioxydants</h3>
+                <p>Le matcha est une source exceptionnelle d'antioxydants, notamment les catéchines, qui aident à lutter contre les radicaux libres et à protéger les cellules.</p>
+            </div>
+        </div>
+        <div class="benefit-item">
+            <div class="icon">
+                <img src="detox-icon.png" alt="Détoxifiant" />
+            </div>
+            <div class="text">
+                <h3>Détoxification</h3>
+                <p>Le matcha aide à détoxifier le corps en éliminant les toxines et en soutenant la digestion grâce à ses propriétés purifiantes.</p>
+            </div>
+        </div>
+        <div class="benefit-item">
+            <div class="icon">
+                <img src="focus-icon.png" alt="Concentration" />
+            </div>
+            <div class="text">
+                <h3>Améliore la Concentration</h3>
+                <p>La théanine, présente dans le matcha, améliore la concentration et la clarté mentale, tout en réduisant le stress.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="infographic">
+        <h2>Le Matcha en un coup d'œil</h2>
+        <div class="infographic-container">
+            <img src="images/matcha.jpeg" alt="Infographie Matcha" />
+        </div>
+    </section>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        let cart = [];
+
+        function addToCart(item, price) {
+            cart.push({ item, price });
+            updateCartNotification();
+        }
+
+        function updateCartNotification() {
+            const cartNotification = document.getElementById('cart-notification');
+            cartNotification.textContent = cart.length;
+        }
+
+        // Fonction pour gérer le clic sur l'icône de connexion
+        function handleLoginClick() {
+            const isLoggedIn = localStorage.getItem('loggedInUser');
+            if (isLoggedIn) {
+                const confirmLogout = confirm("Voulez-vous vous déconnecter ?");
+                if (confirmLogout) {
+                    logout();
+                }
+            } else {
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Fonction de déconnexion
+        function logout() {
+            localStorage.removeItem('loggedInUser');
+            alert("Déconnexion réussie.");
+            window.location.href = 'index.html';
+        }
+        });
+        
+    </script>
+
+</body>
+</html>

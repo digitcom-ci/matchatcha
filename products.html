@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogue Matcha</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Barre de Navigation -->
+  <header>
+      <div class="navbar">
+          <div class="logo">
+              <img src="images/logo.jpeg" alt="Logo Matchatcha">
+          </div>
+
+        <!-- Icône de Connexion/Déconnexion -->
+        <div class="login-icon">
+            <a href="login.html" id="login-link">
+                <!-- SVG de connexion -->
+                <svg id="icon-connexion" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <circle cx="12" cy="8" r="4" fill="#4CAF50"></circle>
+                    <path d="M12 14c-5 0-9 2.5-9 5v1h18v-1c0-2.5-4-5-9-5z" fill="#4CAF50"></path>
+                </svg>
+            </a>
+            <a href="#" id="logout-link" style="display: none;" onclick="logout()">
+                <!-- SVG de déconnexion -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M10 17l5-5h-4v-2h4l-5-5 1.5-1.5 7 7-7 7zM14 3v2h-9v12h9v2h-9c-1.1 0-1.99-.9-1.99-2l-.01-12c0-1.1.89-2 1.99-2h9z"></path>
+                </svg>
+            </a>
+        </div>
+        
+          <div class="cart-icon">
+              <a href="panier.html">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                      <path d="M7 4h14l-1.5 9h-12l-1.5-9zm0 2l1.1 6h11.8l1.1-6h-14zm3.8 10c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2zm7 0c0 1.1-.9 2-2 2s-2-.9-2-2s.9-2 2-2s2 .9 2 2z"></path>
+                  </svg>
+                  <span id="cart-notification" class="notification-badge">0</span>
+              </a>
+          </div>
+          <div class="hamburger" onclick="toggleMenu()">☰</div>
+          <nav id="nav-links">
+              <a href="index.html">Accueil</a>
+              <a href="matcha.html">Pourquoi le matcha</a>
+              <a href="products.html">Nos Produits</a>
+              <a href="benefits.html">Conseils et Recettes</a>
+              <a href="contact.html">Contact</a>
+          </nav>
+      </div>
+  </header>
+
+  <section id="products">
+    <h2>Nos Produits</h2>
+    <div class="category">
+      <div class="products-grid">
+        <div class="product-card">
+          <img src="images/matchapoudre.png" alt="Matcha Poudre">
+          <h4>Matcha Bio </h4>
+          <p><strong>Prix:</strong> <span class="price"></span></p>
+          <button class="view-product" onclick="window.location.href='product-details.html?id=1'">Voir le produit</button>
+          <div class="product-details">
+            <p>Description : Matcha bio provenant du Japon. Idéal pour un boost naturel.</p>
+            <button class="view-product" onclick="window.location.href='product-details.html?id=1&variants=30g-7000,50g-10000,100g-15000'">Voir le produit</button>
+            <p><strong>Détails:</strong> 30g</p>
+            <p><strong>Contenant:</strong> boite plastique</p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <img src="images/matchalatte2.jpeg" alt="Matcha Poudre">
+          <h4>Matcha Latte</h4>
+          <p><strong>Prix:</strong> <span class="price"></span></p>
+          <button class="view-product" onclick="window.location.href='product-details.html?id=2'">Voir le produit</button>
+          <div class="product-details">
+            <p>
+            <ul>
+               <li><strong>Classique</strong> Mélange de matcha, de lait (ou de lait végétal), et de sucre, c'est la version la plus connue.</li>
+              <li><strong>Variante</strong> Matcha latte à la vanille, au caramel, ou au miel pour diversifier les saveurs.</li>
+            </ul>
+            </p>
+            <button class="view-product" onclick="window.location.href='product-details.html?id=2&variants=Classique-5000,Vanille-5000,Caramel-5000,Miel-5000'">Voir le produit</button>
+            <p><strong>Détails:</strong> 250ml </p>
+            <p><strong>Contenant:</strong> cup en plastique</p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <img src="images/matchasmoothie.jpeg" alt="Boisson Matcha">
+          <h4>Matcha Smoothie</h4>
+          <p><strong>Prix:</strong> <span class="price"></span></p>
+          <button class="view-product" onclick="window.location.href='product-details.html?id=3'">Voir le produit</button>
+          <div class="product-details">
+            <ul>
+               <li><strong>Smoothie au matcha et banane :</strong> Parfait pour une texture crémeuse, mélangé avec du lait, du matcha, et une touche de miel.</li>
+              <li><strong>Smoothie détox :</strong> Mélange matcha, épinards, banane, et pomme verte pour une option santé et énergisante.</li>
+            </ul>
+            <p><strong>Détails:</strong> 250ml </p>
+            <p><strong>Contenant:</strong> cup en plastique</p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <img src="images/bubblematcha.jpeg" alt="Boisson Matcha">
+          <h4>Bubble Matcha</h4>
+          <p><strong>Prix:</strong> <span class="price"></span></p>
+          <button class="view-product" onclick="window.location.href='product-details.html?id=4'">Voir le produit</button>
+          <div class="product-details">
+            <ul>
+               <li>Cette boisson est un mélange parfait de la saveur unique du matcha et de la texture ludique des perles de tapioca, créant une expérience unique et gourmande.</li>
+              <li><strong>Variante :</strong> Bubble Matcha au lait de coco pour un goût plus exotique.</li>
+              <li>Matcha latte frappé avec boba et de la glace pilée pour une version frappée.</li>
+              <li>Matcha frappé avec sirop de fruits pour une touche fruitée.</li>
+            </ul>
+            <p><strong>Détails :</strong> 250ml </p>
+            <p><strong>Contenant:</strong> cup en plastique</p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <img src="images/thematcha1.jpeg" alt="Fouet à Matcha">
+          <h4>Thé Matcha</h4>
+          <p><strong>Prix:</strong> <span class="price"></span></p>
+          <button class="view-product" onclick="window.location.href='product-details.html?id=5'">Voir le produit</button>
+          <div class="product-details">
+              <p>Le thé au matcha est une boisson traditionnelle japonaise qui se distingue par sa préparation unique. Contrairement aux thés classiques, le matcha est un thé vert en poudre finement broyé. Pour préparer un thé au matcha, la poudre est mélangée directement avec de l'eau chaude, ce qui permet de consommer la feuille entière et de profiter de tous ses bienfaits.</p>
+              <p><strong>Détails:</strong> 100ml </p>
+              <p><strong>Contenant:</strong> cup en plastique</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Définir la devise
+    const currencySymbol = 'FCFA';
+
+    // Mettre à jour les prix dynamiquement
+    document.addEventListener('DOMContentLoaded', function() {
+      const prices = document.querySelectorAll('.product-card .price');
+      const productPrices = [7000, 5000, 7500, 7000, 3000]; // Remplacer ces valeurs par les prix réels
+
+      prices.forEach((priceElement, index) => {
+        priceElement.textContent = productPrices[index] + ' ' + currencySymbol;
+      });
+
+      // Mise à jour du badge du panier
+      function updateCartNotification() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+        document.getElementById('cart-notification').innerText = totalItems;
+      }
+
+      updateCartNotification();
+    });
+
+    // Fonction pour basculer la visibilité du menu
+    function toggleMenu() {
+      const navLinks = document.getElementById('nav-links');
+      navLinks.classList.toggle('active');
+    }
+
+    // Fonction pour gérer le clic sur l'icône de connexion
+    function handleLoginClick() {
+        const isLoggedIn = localStorage.getItem('loggedInUser'); // Vérifie si l'utilisateur est connecté
+
+        if (isLoggedIn) {
+            // Affiche une boîte de dialogue pour confirmer la déconnexion
+            const confirmLogout = confirm("Voulez-vous vous déconnecter ?");
+            if (confirmLogout) {
+                logout(); // Appelle la fonction de déconnexion si confirmé
+            }
+        } else {
+            // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
+            window.location.href = "login.html";
+        }
+    }
+
+    // Fonction de déconnexion
+    function logout() {
+        localStorage.removeItem('loggedInUser'); // Supprime les informations de connexion
+        alert("Vous avez été déconnecté."); // Message de confirmation de déconnexion
+        window.location.href = "index.html"; // Redirige vers la page d'accueil
+    }
+
+    // Affiche l'état de connexion
+    document.addEventListener("DOMContentLoaded", function() {
+        const isLoggedIn = localStorage.getItem('loggedInUser');
+        if (isLoggedIn) {
+            // Change l'icône ou le style pour indiquer que l'utilisateur est connecté
+            document.getElementById('icon-connexion').setAttribute("fill", "#ff0000"); // Change la couleur de l'icône pour illustrer la connexion
+        }
+    });
+  </script>
+</body>
+</html>

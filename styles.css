@@ -1,0 +1,1181 @@
+/* Barre de Navigation */
+header {
+    background-color: #fff;
+    padding: 0.5em 1em;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.logo img {
+    height: 40px; /* Ajuste la taille selon tes préférences */
+}
+
+
+.hamburger {
+    font-size: 1.5em;
+    cursor: pointer;
+    display: none;
+    color: #688F4E;
+    
+}
+
+nav {
+    display: flex;
+    gap: 1.5em;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Menu Hamburger pour Mobile */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #2B463C;
+        width: 100%;
+        padding: 1em 0;
+    }
+
+    nav a {
+        padding: 0.5em 1em;
+        text-align: center;
+        display: block;
+    }
+
+    nav.active {
+        display: flex;
+    }
+}
+
+
+/* Global Styles */
+body {
+    font-family: Sifonn;
+    color: #000;
+    margin: 0;
+    padding: 0;
+    background-color: #fff
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+}
+
+h2, h3 {
+    color: #688F4E;
+    text-align: center;
+    margin-top: 0;
+}
+
+p {
+    text-align: center;
+}
+
+/* Bannière principale */
+.banner {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.banner img {
+    width: 100%;
+    height: auto;
+    filter: brightness(60%);
+}
+
+.banner-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.banner h1 {
+    font-size: 2.5em;
+}
+
+/* Présentation de la Marque */
+.brand-presentation {
+    padding: 2em;
+    background-color: #ffffff;
+    margin: 2em 0;
+}
+
+/* Produits Phare avec Défilement Horizontal */
+.scroll-container {
+    display: flex;
+    gap: 1.5em;
+    overflow-x: auto; /* Activer le défilement horizontal */
+    padding: 1em;
+}
+
+.scroll-container::-webkit-scrollbar {
+    display: none; /* Masquer la barre de défilement pour un design épuré */
+}
+
+.product {
+    min-width: 200px; /* Largeur minimale pour chaque produit */
+    background-color: #ffffff;
+    padding: 1em;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Style pour le prix */
+.price {
+    font-size: 1.2em;
+    color: #000;
+    font-weight: bold;
+    margin: 0.5em 0;
+}
+
+/* Style pour le bouton Ajouter au panier */
+.add-to-cart {
+    background-color: #688F4E;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart:hover {
+    background-color: #2B463C;
+}
+
+
+
+/* Bienfaits du Matcha */
+.matcha-benefits {
+    color: #fff;
+    padding: 2em;
+    background-color: #688F4E;
+    margin: 2em 0;
+}
+
+/* Section Contact */
+.contact {
+    background-color: #2B463C;
+    padding: 2em;
+    text-align: center;
+}
+
+.contact h2 {
+    font-size: 2em;
+    margin-bottom: 1em;
+    color: #fff;
+}
+
+.contact-info {
+    margin-bottom: 1.5em;
+    color: #fff;
+}
+
+.contact-info p {
+    margin: 0.5em 0;
+}
+
+/* Map */
+.map-container {
+    margin: 1.5em 0;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Liens vers les réseaux sociaux */
+.social-links {
+    margin-top: 1em;
+}
+
+.social-links h3 {
+    margin-bottom: 0.5em;
+    color: #fff;
+}
+
+.social-links a {
+    margin: 0 0.5em;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.social-links a:hover {
+    text-decoration: underline;
+}
+
+/* Section Blog */
+.blog {
+    background-color: #f9f9f9;
+    padding: 2em;
+    text-align: center;
+}
+
+.blog h2 {
+    font-size: 2em;
+    margin-bottom: 1em;
+    color: #688F4E;;
+}
+
+/* Défilement horizontal pour les articles */
+.blog .scroll-container {
+    display: flex;
+    gap: 1.5em;
+    overflow-x: auto; /* Activer le défilement horizontal */
+    padding: 1em;
+}
+
+.blog .scroll-container::-webkit-scrollbar {
+    display: none; /* Masquer la barre de défilement pour un design épuré */
+}
+
+.blog-post {
+    min-width: 200px; /* Largeur minimale pour chaque article */
+    background-color: #ffffff;
+    padding: 1em;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.blog-post img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px 8px 0 0;
+}
+
+.blog-post h3 {
+    font-size: 1.2em;
+    margin: 0.5em 0;
+    color: #688F4E;
+}
+
+.blog-post p {
+    font-size: 0.9em;
+    color: #000;
+    margin: 0.5em 0 1em;
+}
+
+/* Conteneur pour les boutons Voir plus */
+.read-more-container {
+    display: flex;
+    justify-content: flex-start; /* Aligner les boutons à gauche */
+    margin-top: 1em;
+}
+
+.read-more {
+    display: inline-block;
+    padding: 0.5em 1em;
+    background-color: #688F4E;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-right: 1em; /* Espacement entre les boutons */
+}
+
+.read-more:hover {
+    background-color: #2B463C;
+}
+
+.products {
+      background-color: #fff;
+      padding: 20px;
+      margin: 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+#filters {
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#filters h2 {
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #698F4E;
+  margin-bottom: 0;
+}
+
+#filter-form {
+  margin-top: 10px;
+  display: none;
+  color: #698F4E;
+}
+
+#filter-form label, #filter-form select {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #698F4E;
+}
+
+/* Mise en page pour les produits */
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Espace entre les produits */
+}
+
+.product-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 5px;
+  width: 165px;
+  text-align: center;
+  margin-left: 0;
+  
+}
+
+.product-card img {
+  object-fit: cover; /* Ajuste l'image pour remplir le conteneur */
+  border-radius: 8px;
+  overflow: hidden; /* Cache les débordements */
+  width: 170px; /* Largeur souhaitée */
+  height: 170px; /* Hauteur souhaitée */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff; /* Optionnel : couleur d'arrière-plan */
+
+}
+
+
+.product-card h4 {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.product-card button {
+  background-color: #688F4E;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.product-card button:hover {
+  background-color: #2B463C;
+}
+
+.category {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#products {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+#products h2 {
+  text-align: center;
+}
+
+/* Section Vidéo */
+.intro-video {
+    text-align: center;
+    margin: 2em 0;
+    padding: 1em;
+    background-color: #f4f4f4;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Ratio 16:9 */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background-color: #000;
+}
+
+.video-container iframe,
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.view-product {
+  background-color: #688F4E;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  margin-bottom: 10px;
+}
+
+.view-product:hover {
+  background-color: #2B463C;
+}
+
+
+/* Icône du panier */
+.cart-icon {
+    margin-left: -10px;
+    cursor: pointer;
+    height: 20px;
+}
+
+/* Optionnel: Style pour le panier au survol */
+.cart-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Changer la couleur de l'icône du panier */
+.cart-icon svg path {
+    fill: #688F4E; /* Couleur de l'icône du panier (vert) */
+}
+
+/* Optionnel: Style pour le panier au survol */
+.cart-icon:hover svg path {
+    fill: #2B464C; /* Couleur plus foncée au survol (vert plus foncé) */
+}
+
+
+#empty-cart-message {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#add-products-btn {
+    padding: 10px 20px;
+    background-color: #fff; /* Vert */
+    color: #688F4E;;
+    border: 1px solid #688F4E; /* Vert */;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+#add-products-btn:hover {
+    background-color: #2B463C; /* Vert plus foncé au survol */;
+}
+
+#checkout {
+    padding: 10px 20px;
+    background-color: #fff; /* Vert */
+    color: #688F4E;;
+    border: 1px solid #688F4E; /* Vert */;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    border-radius: 5px;
+
+}
+
+#add-products-btn:hover {
+    background-color: #2b463c; /* Vert plus foncé au survol */
+}
+
+/* Panier */
+.cart {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 10px;
+      margin-top: 10px;
+      padding: 5px;
+      width: 400px;
+      text-align: center;
+      margin-left: 3px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+
+.remove-item {
+    color: #ff0000;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.remove-item:hover {
+    color: #cc0000;
+}
+
+.item-image img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 15px;
+    margin-left: 10px;
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-quantity-price {
+    text-align: right;
+    width: 150px;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -1px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    padding: 1px 7px;
+    font-size: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    min-width: 2px;
+    text-align: center;
+    margin-right: 45px;
+    margin-top: 7px;
+}
+
+#product-details {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#product-image {
+  max-width: 100%;
+  height: auto;
+}
+
+#product-details h2 {
+  font-size: 2em;
+  color: #688F4E;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+#product-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 10px;
+}
+
+#product-info img {
+  max-width: 400px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+#product-info h3 {
+  font-size: 1.8em;
+  color: #688F4E;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+#product-info p {
+  font-size: 1.1em;
+  color: #000;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+#product-price {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #2b463c;
+}
+
+#product-form {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 200px;  
+}
+
+#product-form label {
+  display: block;
+  font-size: 1.1em;
+  color: #000;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-top: 15px;
+}
+
+#product-form input[type="number"] {
+  width: 20%;
+  padding: 10px;
+  font-size: 1.1em;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+
+#product-form button {
+  width: 50%;
+  padding: 12px;
+  font-size: 1.1em;;
+  background-color: #688F4E;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-left: 5%;
+}
+
+#product-form button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+#product-form button:not(:disabled):hover {
+  background-color: #2b463c;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  #product-info {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #product-info img {
+    max-width: 100%;
+  }
+
+  #product-form {
+    max-width: 100%;
+  }
+}
+
+/* Style du menu déroulant de quantité */
+#quantity {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #2d463c;
+  width: 80px;
+  text-align: center;
+  appearance: none;
+  -moz-appearance: none; /* Firefox */
+  -webkit-appearance: none; /* Chrome/Safari */
+  color: #2b463c;
+  background-color: #fff;
+  margin-right: 10px;
+  margin-left: 30px;
+  
+}
+
+#quantity:focus {
+  outline: none;
+  background-color: #2b463c;
+  color: #fff;
+}
+
+/* Masquer les détails du produit */
+.product-details {
+    display: none;
+    margin-top: 15px;
+    text-align: left;
+}
+
+/* Carrousel */
+#related-products {
+    margin-top: 40px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#related-products h3 {
+    font-size: 1.8em;
+    color: #688F4E;
+    margin-bottom: 20px;
+}
+
+.related-products-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 10px;
+    height: 500px;
+}
+
+.related-product {
+    min-width: 300px;
+    text-align: center;
+    border: 1px solid #eee;
+    padding: 5px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: transform 0.3s;
+    flex: 0 0 auto;
+    height: 400px;
+}
+
+.related-product img {
+    max-width: 400px;
+    border-radius: 8px;
+    height: 300px;
+    padding: 10px;
+}
+
+.related-product a {
+  display: block;
+  text-decoration: none;
+  color: #000;
+}
+
+.related-product h4 {
+    font-size: 1em;
+    color: #666;
+    margin-top: 10px;
+}
+
+.related-product p {
+    font-size: 0.9em;
+    color: #999;
+}
+
+.view-product-btn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    font-size: 0.9em;
+    background-color: #688F4E;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.productall button {
+    margin-left: 120px;
+    margin-top: 10px;
+    padding: 8px 16px;
+    font-size: 0.9em;
+    background-color: #688F4E;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    }
+
+.view-product-btn:hover {
+    background-color: #2b463c;
+}
+
+#benefits {
+    padding: 40px 20px;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-item .icon {
+    margin-right: 20px;
+}
+
+.benefit-item .icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.benefit-item .text h3 {
+    font-size: 1.3em;
+    color: #4CAF50;
+}
+
+#infographic {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #e0f7fa;
+}
+
+#infographic img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.blog-header {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #fff;
+    margin-bottom: 40px;
+}
+
+.blog-header h1 {
+    font-size: 36px;
+    color: #2e8b57;
+}
+
+.blog-header p {
+    font-size: 18px;
+    color: #666;
+}
+
+.blog-posts {
+    display: block;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.post {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.post img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.post h2 {
+    font-size: 24px;
+    color: #688F4E;
+}
+
+.post .read-more {
+    display: inline-block;
+    margin-top: 10px;
+    color: #688F4E;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.post .read-more:hover {
+    text-decoration: underline;
+    color: #2b463c;
+}
+
+/* styles.css pour les articles */
+.article-header {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #fff;
+    margin-bottom: 30px;
+}
+
+.article-header h1 {
+    font-size: 36px;
+    color: #688F4E;
+}
+
+.article-header p {
+    font-size: 18px;
+    color: #000;
+}
+
+.article-content {
+    padding: 20px;
+    background-color: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.article-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.article-content h2, .article-content h3 {
+    color: #688F4E;
+}
+
+.article-content p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Style pour le bouton de retour */
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    color: #688F4E;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 80px;
+}
+
+.back-button svg {
+    margin-right: 8px; /* Espace entre la flèche et le texte */
+    transition: transform 0.3s ease;
+}
+
+.back-button:hover svg {
+    transform: translateX(-5px); /* Effet de déplacement de la flèche au survol */
+}
+
+.back-button:hover {
+    color: #688F4E; /* Changer la couleur du texte au survol */
+}
+
+header nav ul li a.active {
+    text-decoration: underline;
+}
+
+.contact-page {
+    width: 80%;
+    margin: 30px auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-page h1 {
+    text-align: center;
+    color: #2d2d2d;
+}
+
+.contact-page p {
+    text-align: center;
+    font-size: 16px;
+}
+
+.form-group {
+    margin: 20px 0;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #688F4E;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #2b463c;
+}
+
+.contact-info ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.contact-info ul li {
+    margin: 10px 0;
+}
+
+header button {
+    background-color: #fff;
+    color: #688F4E;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.product-image-container {
+  width: 170px; /* Largeur souhaitée */
+  height: 170px; /* Hauteur souhaitée */
+  overflow: hidden; /* Cache les débordements */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px; /* Optionnel : bords arrondis */
+  background-color: #f5f5f5; /* Optionnel : couleur d'arrière-plan */
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ajuste l'image pour remplir le conteneur */
+}
+
+#product-container img {
+      width: 100%; /* Limite la largeur à 100% du conteneur */
+      max-width: 400px; /* Largeur maximale de l'image */
+      height: auto; /* Garder les proportions de l'image */
+      display: block;
+      margin: 0 auto;
+    }
+
+#variant {
+      width: 250px; /* Largeur du menu déroulant */
+      height: 30px; /* Hauteur du menu déroulant */
+      color: #688F4E;
+    }
+
+/* Icône de déconnexion visible uniquement quand l'utilisateur est connecté */
+#login-icon {
+    display: none;
+    
+}
+
+.login-icon {
+    margin-left: 97px;
+    cursor: pointer;
+    height: 23px;
+}
+
+/* Optionnel: Style pour le panier au survol */
+.login-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Changer la couleur de l'icône du panier */
+.login-icon svg path {
+    fill: #688F4E; /* Couleur de l'icône du panier (vert) */
+}
+
+.login-icon svg circle {
+    fill: #688F4E; /* Couleur de l'icône du panier (vert) */
+} 
+
+/* Optionnel: Style pour le panier au survol */
+.login-icon:hover svg path {
+    fill: #2B464C; /* Couleur plus foncée au survol (vert plus foncé) */
+}
+
+.login-icon:hover svg circle {
+    fill: #2B464C; /* Couleur plus foncée au survol (vert plus foncé) */
+}
+
+/* Icône de connexion visible uniquement quand l'utilisateur n'est pas connecté */
+#logout-icon {
+    display: block;
+}
+
+    /* Style pour la section "Pourquoi le Matcha ?" */
+    .why {
+        background-color: #688F4E;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .why h1 {
+        color: #fff;
+    }
+
+    /* Style pour les sections des bienfaits */
+    #benefits {
+        padding: 30px;
+        background-color: #fff;
+    }
+
+    .benefit-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .benefit-item .icon {
+        margin-right: 20px;
+    }
+
+    .benefit-item img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .benefit-item .text h3 {
+        margin: 0;
+        color: #000;
+    }
+
+    .benefit-item .text p {
+        color: #000;
+    }
+
+    /* Style pour l'infographie */
+    #infographic {
+        padding: 30px;
+        background-color: #ffffff;
+        text-align: center;
+    }
+
+    #infographic img {
+        max-width: 100%;
+        height: auto;
+    }
