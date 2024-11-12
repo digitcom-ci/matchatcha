@@ -178,29 +178,23 @@
                 window.location.href = 'index.html';
             }
         });
-        // Texte défilant 
         const announcementText = document.getElementById('announcement-text'); 
-        let scrollSpeed = 2; // Vitesse du défilement 
+        let position = window.innerWidth; // Position initiale du texte (hors de l'écran) 
+        const speed = 2; // Vitesse du défilement 
         
         function scrollText() { 
-            announcementText.style.transform = `translateX(${scrollSpeed}px)`; 
+            position -= speed; // Déplace le texte vers la gauche 
+            announcementText.style.transform = `translateX(${position}px)`; 
             
-            const currentTransform = parseInt(window.getComputedStyle(announcementText).transform.split(',')[4]) || 0; 
-            const parentWidth = announcementText.parentElement.offsetWidth; 
-            const textWidth = announcementText.offsetWidth; 
+            // Réinitialiser la position si le texte sort de l'écran 
+            if (position < -announcementText.offsetWidth) { 
+                position = window.innerWidth; 
+            }
             
-            // Réinitialiser la position si le texte a entièrement défilé 
-            if (currentTransform > parentWidth) { 
-                announcementText.style.transform = `translateX(-${textWidth}px)`; 
-            } else { announcementText.style.transform = `translateX(${currentTransform + scrollSpeed}px)`; 
-            } 
-            requestAnimationFrame(scrollText); 
-        }
-       
-
-        scrollText(); // Démarrer le défilement
-         announcementText.addEventListener('mouseover', () => { scrollSpeed = 0; }); 
-         announcementText.addEventListener('mouseout', () => { scrollSpeed = 2; });
+            requestAnimationFrame(scrollText); // Appelle la fonction en continu 
+        } 
+        
+        scrollText(); // Lance le défilement
 
     </script>
 
