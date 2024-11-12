@@ -82,54 +82,41 @@
         </article>
     </section>
     <script>
+        // Fonction pour basculer la visibilité du menu
         function toggleMenu() {
-            const navLinks = document.getElementById('nav-links');
-            navLinks.classList.toggle('active');
+          const navLinks = document.getElementById('nav-links');
+          navLinks.classList.toggle('active');
         }
 
-        let cart = [];
-
-        function addToCart(item, price) {
-            cart.push({ item, price });
-            updateCartNotification();
-        }
-
-        function updateCartNotification() {
-            const cartNotification = document.getElementById('cart-notification');
-            cartNotification.textContent = cart.length;
-        }
-        // Exemple simple pour une animation de chargement d'articles ou effets de transition
         document.addEventListener("DOMContentLoaded", function() {
-            let articles = document.querySelectorAll('.post');
-            articles.forEach(function(article, index) {
-                setTimeout(function() {
-                    article.style.opacity = 1;
-                    article.style.transform = 'translateY(0)';
-                }, index * 300);
-            });
-        });
-
-        // Fonction pour gérer le clic sur l'icône de connexion
-        function handleLoginClick() {
-            const isLoggedIn = localStorage.getItem('loggedInUser');
-            if (isLoggedIn) {
-                const confirmLogout = confirm("Voulez-vous vous déconnecter ?");
-                if (confirmLogout) {
-                    logout();
-                }
-            } else {
-                window.location.href = 'login.html';
+            // Mise à jour du badge du panier
+            function updateCartNotification() {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+                document.getElementById('cart-notification').innerText = totalItems;
             }
-        }
+            updateCartNotification();
 
-        // Fonction de déconnexion
-        function logout() {
-            localStorage.removeItem('loggedInUser');
-            alert("Déconnexion réussie.");
-            window.location.href = 'index.html';
-        }
+            // Fonction pour gérer le clic sur l'icône de connexion
+            function handleLoginClick() {
+                const isLoggedIn = localStorage.getItem('loggedInUser');
+                if (isLoggedIn) {
+                    const confirmLogout = confirm("Voulez-vous vous déconnecter ?");
+                    if (confirmLogout) {
+                        logout();
+                    }
+                } else {
+                    window.location.href = 'login.html';
+                }
+            }
+
+            // Fonction de déconnexion
+            function logout() {
+                localStorage.removeItem('loggedInUser');
+                alert("Déconnexion réussie.");
+                window.location.href = 'index.html';
+            }
         });
-
     </script>
     
 
