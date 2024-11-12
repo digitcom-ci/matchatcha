@@ -1179,3 +1179,31 @@ header button {
         max-width: 100%;
         height: auto;
     }
+
+/* Bande d'annonce */ 
+.announcement-bar { 
+    background-color: #4CAF50; /* Couleur de fond */ 
+    color: white; /* Couleur du texte */ 
+    font-size: 16px; /* Taille du texte */ 
+    text-align: center; 
+    overflow: hidden; 
+    white-space: nowrap; 
+    position: fixed; /* Position fixe en haut */ 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    z-index: 9999;
+    height: 40px; /* Hauteur de la bande */ 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+} 
+
+#announcement-text { 
+    display: inline-block; 
+    white-space: nowrap; 
+    position: relative; 
+    transform: translateX(100%); /* Commencer hors de l'écran */ 
+    will-change: transform; 
+    transition: transform 0.2s linear; 
+}
