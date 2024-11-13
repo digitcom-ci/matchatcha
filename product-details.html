@@ -566,6 +566,58 @@ document.addEventListener('DOMContentLoaded', () => {
       relatedProductsContainer.innerHTML += productHTML;
     });
   }
+  
+  function addToCart() {
+    const variantSelect = document.getElementById("variant");
+    const quantitySelect = document.getElementById("quantity");
+
+    const selectedVariant = variantSelect ? variantSelect.value : null;
+    const quantity = quantitySelect ? parseInt(quantitySelect.value) : 0;
+
+    if (!selectedVariant || quantity <= 0) {
+        alert("Veuillez sélectionner une variante et une quantité valide.");
+        return;
+    }
+
+    // Récupère le panier actuel depuis localStorage
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Ajoute le produit au panier
+    const productId = parseInt(new URLSearchParams(window.location.search).get("id"));
+    const product = products.find(p => p.id === productId);
+
+    if (product) {
+        // Vérifie si le produit existe déjà dans le panier
+        const existingItem = cart.find(item => item.id === productId && item.variant === selectedVariant);
+
+        if (existingItem) {
+            existingItem.quantity += quantity; // Met à jour la quantité
+        } else {
+            cart.push({
+                id: productId,
+                name: product.name,
+                variant: selectedVariant,
+                quantity: quantity,
+                price: product.variants.find(v => v.name === selectedVariant).price,
+            });
+        }
+
+        // Sauvegarde le panier dans localStorage
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        // Affiche le message de confirmation
+        const message = document.getElementById("message");
+        message.style.display = "block";
+        setTimeout(() => {
+            message.style.display = "none";
+        }, 2000);
+
+        // Mets à jour la notification du panier
+        updateCartNotification();
+    } else {
+        alert("Erreur : Produit introuvable.");
+    }
+}
 
   function updateCartNotification() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
