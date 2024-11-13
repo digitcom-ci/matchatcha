@@ -418,6 +418,12 @@ function toggleMenu() {
     menu.classList.toggle('active');
 }
 
+function updateCartNotification() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+      document.getElementById('cart-notification').innerText = totalItems;
+    }
+
     // Fonction pour récupérer l'ID du produit depuis l'URL
     function getProductIdFromURL() {
       const urlParams = new URLSearchParams(window.location.search);
