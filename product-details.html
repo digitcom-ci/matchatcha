@@ -418,73 +418,159 @@ function toggleMenu() {
     menu.classList.toggle('active');
 }
 
-// Fonction pour récupérer et afficher automatiquement les devises disponibles
-function loadCurrencies() {
-    const currencies = ['FCFA', 'USD', 'EUR']; // Liste de devises disponibles
-    const currencyDropdown = document.getElementById('currency');
+    // Fonction pour récupérer l'ID du produit depuis l'URL
+    function getProductIdFromURL() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('id');
+    }
 
-    // Créer et ajouter une option pour chaque devise
-    currencies.forEach(currency => {
-        const option = document.createElement('option');
-        option.value = currency;
-        option.textContent = currency;
-        currencyDropdown.appendChild(option);
-    });
-}
+document.addEventListener('DOMContentLoaded', () => {
+  const currency = "FCFA";
+  const products = [
+    // Liste des produits (comme dans votre code original)
+   {
+        id: 1,
+        name: "Matcha Bio",
+        price: 7000,
+        description: "Matcha bio provenant du Japon. Idéal pour un boost naturel.",
+        variants: [
+          { name: "30g", price: 7000 },
+          { name: "50g", price: 10000 },
+          { name: "100g", price: 15000 }
+        ],
+        details: "30g",
+        container: "boîte plastique",
+        image: "images/matchapoudre.png"
+      },
+      {
+        id: 2,
+        name: "Matcha Latte",
+        price: 5000,
+        description: "Mélange de matcha, de lait (ou de lait végétal), et de sucre.",
+        variants: [
+          { name: "Classique", price: 5000 },
+          { name: "Vanille", price: 5000 },
+          { name: "Caramel", price: 5000 },
+          { name: "Miel", price: 5000 }
+        ],
+        details: "250ml",
+        container: "cup en plastique",
+        image: "images/matchalatte2.jpeg"
+      },
+      {
+        id: 3,
+        name: "Matcha Smoothie",
+        price: 7500,
+        description: "Smoothie au matcha et banane pour une texture crémeuse.",
+        variants: [
+          { name: "Matcha-Banane", price: 7500 },
+          { name: "Détox", price: 7500 }
+        ],
+        details: "250ml",
+        container: "cup en plastique",
+        image: "images/matchasmoothie.jpeg"
+      },
+      {
+        id: 4,
+        name: "Bubble Matcha",
+        price: 7000,
+        description: "Boisson unique avec matcha et perles de tapioca.",
+        variants: [
+          { name: "Lait de coco", price: 7000 },
+          { name: "Frappé avec boba", price: 7000 },
+          { name: "Sirop de fruits", price: 7000 }
+        ],
+        details: "250ml",
+        container: "cup en plastique",
+        image: "images/bubblematcha.jpeg"
+      },
+      {
+        id: 5,
+        name: "Thé Matcha",
+        price: 3000,
+        description: "Boisson traditionnelle japonaise préparée avec du matcha.",
+        details: "100ml",
+        container: "cup en plastique",
+        image: "images/thematcha1.jpeg"
+      }
+  ];
 
-// Fonction pour ajouter un produit au panier
-function addToCart() {
-    // Récupérer les informations du produit sélectionné
-    const variant = document.getElementById('variant').value;
-    const quantity = document.getElementById('quantity').value;
+  function loadProduct() {
+    const params = new URLSearchParams(window.location.search);
+    const productId = parseInt(params.get("id"));
+    const product = products.find(p => p.id === productId);
 
-    // Simulation d'ajout au panier
-    alert(`Produit ajouté au panier : ${variant}, Quantité : ${quantity}`);
+    if (isNaN(productId) || !product) {
+      alert('Produit introuvable.');
+      return;
+    }
 
-    // Afficher le message de succès
-    document.getElementById('message').style.display = 'block';
+    const productContainer = document.getElementById("product-container");
+    const productHTML = `
+      <img src="${product.image}" alt="${product.name}">
+      <h1>${product.name}</h1>
+      <p>${product.description}</p>
+      <p><strong>Prix:</strong> ${product.price} ${currency}</p>
+      <p><strong>Détails:</strong> ${product.details}</p>
+      <p><strong>Conditionnement:</strong> ${product.container}</p>
+    `;
+    productContainer.innerHTML = productHTML;
 
-    // Désactiver le bouton "Ajouter au panier" après l'ajout
-    document.getElementById('add-to-cart').disabled = true;
+    const variantSelect = document.getElementById("variant");
+    if (product.variants && product.variants.length > 0) {
+      product.variants.forEach(variant => {
+        const option = document.createElement("option");
+        option.value = variant.name;
+        option.textContent = `${variant.name} - ${variant.price} ${currency}`;
+        variantSelect.appendChild(option);
+      });
+    } else {
+      variantSelect.innerHTML = '<option value="">Aucune variante disponible</option>';
+      variantSelect.disabled = true;
+    }
 
-    // Mettre à jour le badge du panier
-    let cartNotification = document.getElementById('cart-notification');
-    let currentQuantity = parseInt(cartNotification.textContent);
-    cartNotification.textContent = currentQuantity + 1;
-}
+    const quantitySelect = document.getElementById("quantity");
+    for (let i = 1; i <= 10; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = i;
+      quantitySelect.appendChild(option);
+    }
+    quantitySelect.value = 1; // Valeur par défaut
+    document.getElementById("add-to-cart").disabled = false;
 
-// Fonction de mise à jour des produits similaires
-function loadRelatedProducts() {
+    loadRelatedProducts(productId);
+  }
+
+  function loadRelatedProducts(productId) {
+    const relatedProducts = products.filter(p => p.id !== productId);
     const relatedProductsContainer = document.querySelector('.related-products-container');
-    
-    // Liste simulée de produits similaires
-    const relatedProducts = [
-        { name: "Matcha Classique", price: "10,000 FCFA", imageUrl: "product1.jpg", link: "product1.html" },
-        { name: "Matcha Premium", price: "20,000 FCFA", imageUrl: "product2.jpg", link: "product2.html" },
-        { name: "Matcha Bio", price: "15,000 FCFA", imageUrl: "product3.jpg", link: "product3.html" }
-    ];
+    relatedProductsContainer.innerHTML = '';
 
-    // Créer des éléments pour chaque produit similaire
     relatedProducts.forEach(product => {
-        const productDiv = document.createElement('div');
-        productDiv.classList.add('related-product');
-
-        productDiv.innerHTML = `
-            <img src="${product.imageUrl}" alt="${product.name}">
-            <h4>${product.name}</h4>
-            <p>${product.price}</p>
-            <a href="${product.link}" class="view-details">Voir détails</a>
-        `;
-        
-        relatedProductsContainer.appendChild(productDiv);
+      const productHTML = `
+        <div class="related-product">
+          <img src="${product.image}" alt="${product.name}">
+          <h4>${product.name}</h4>
+          <p>${product.description}</p>
+          <p><strong>Prix:</strong> ${product.price} ${currency}</p>
+          <a href="product-details.html?id=${product.id}" class="view-details">Voir le produit</a>
+        </div>
+      `;
+      relatedProductsContainer.innerHTML += productHTML;
     });
-}
+  }
 
-// Fonction d'initialisation
-window.onload = function() {
-    loadCurrencies();          // Charger les devises
-    loadRelatedProducts();     // Charger les produits similaires
-};
+  function updateCartNotification() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+    document.getElementById('cart-notification').innerText = totalItems;
+  }
+
+  loadProduct();
+  updateCartNotification();
+});
+
  </script>
   
 
