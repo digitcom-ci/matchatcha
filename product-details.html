@@ -272,7 +272,30 @@ form select {
     text-align: center;
     margin-right: 45px;
     margin-top: 7px;
-}
+  }
+  /* Style pour le bouton de retour */
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    color: #688F4E;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 80px;
+  }
+
+.back-button svg {
+    margin-right: 8px; /* Espace entre la flèche et le texte */
+    transition: transform 0.3s ease;
+  }
+
+.back-button:hover svg {
+    transform: translateX(-5px); /* Effet de déplacement de la flèche au survol */
+  }
+
+.back-button:hover {
+    color: #688F4E; /* Changer la couleur du texte au survol */
+  }
 }
   </style>
     
