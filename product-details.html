@@ -296,6 +296,44 @@ form select {
 .back-button:hover {
     color: #688F4E; /* Changer la couleur du texte au survol */
   }
+  /* Icône de déconnexion visible uniquement quand l'utilisateur est connecté */
+#login-icon {
+    display: none;
+    }
+
+.login-icon {
+    margin-left: 97px;
+    cursor: pointer;
+    height: 23px;
+  }
+
+/* Optionnel: Style pour le panier au survol */
+.login-icon:hover {
+    transform: scale(1.1);
+  }
+
+/* Changer la couleur de l'icône du panier */
+.login-icon svg path {
+    fill: #688F4E; /* Couleur de l'icône du panier (vert) */
+  }
+
+.login-icon svg circle {
+    fill: #688F4E; /* Couleur de l'icône du panier (vert) */
+  } 
+
+/* Optionnel: Style pour le panier au survol */
+.login-icon:hover svg path {
+    fill: #2B464C; /* Couleur plus foncée au survol (vert plus foncé) */
+  }
+
+.login-icon:hover svg circle {
+    fill: #2B464C; /* Couleur plus foncée au survol (vert plus foncé) */
+  }
+
+/* Icône de connexion visible uniquement quand l'utilisateur n'est pas connecté */
+#logout-icon {
+    display: block;
+  }
 }
   </style>
     
