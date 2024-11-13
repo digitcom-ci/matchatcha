@@ -567,56 +567,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  function addToCart() {
-    const variantSelect = document.getElementById("variant");
-    const quantitySelect = document.getElementById("quantity");
+function addToCart() {
+  const variant = document.getElementById("variant").value;
+  const quantity = parseInt(document.getElementById("quantity").value);
 
-    const selectedVariant = variantSelect ? variantSelect.value : null;
-    const quantity = quantitySelect ? parseInt(quantitySelect.value) : 0;
+  if (!variant || quantity <= 0) {
+    alert("Veuillez sélectionner une variante et une quantité valide.");
+    return;
+  }
 
-    if (!selectedVariant || quantity <= 0) {
-        alert("Veuillez sélectionner une variante et une quantité valide.");
-        return;
-    }
+  const productName = document.querySelector("#product-container h1").textContent;
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    // Récupère le panier actuel depuis localStorage
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  // Vérifie si l'article existe déjà dans le panier
+  const existingItem = cart.find(item => item.name === productName && item.variant === variant);
 
-    // Ajoute le produit au panier
-    const productId = parseInt(new URLSearchParams(window.location.search).get("id"));
-    const product = products.find(p => p.id === productId);
+  if (existingItem) {
+    existingItem.quantity += quantity;
+  } else {
+    cart.push({
+      name: productName,
+      variant: variant,
+      quantity: quantity,
+    });
+  }
 
-    if (product) {
-        // Vérifie si le produit existe déjà dans le panier
-        const existingItem = cart.find(item => item.id === productId && item.variant === selectedVariant);
+  localStorage.setItem("cart", JSON.stringify(cart));
 
-        if (existingItem) {
-            existingItem.quantity += quantity; // Met à jour la quantité
-        } else {
-            cart.push({
-                id: productId,
-                name: product.name,
-                variant: selectedVariant,
-                quantity: quantity,
-                price: product.variants.find(v => v.name === selectedVariant).price,
-            });
-        }
+  // Affiche un message de confirmation
+  const message = document.getElementById("message");
+  message.style.display = "block";
+  message.textContent = "Produit ajouté au panier !";
 
-        // Sauvegarde le panier dans localStorage
-        localStorage.setItem("cart", JSON.stringify(cart));
+  setTimeout(() => {
+    message.style.display = "none";
+  }, 3000);
 
-        // Affiche le message de confirmation
-        const message = document.getElementById("message");
-        message.style.display = "block";
-        setTimeout(() => {
-            message.style.display = "none";
-        }, 2000);
-
-        // Mets à jour la notification du panier
-        updateCartNotification();
-    } else {
-        alert("Erreur : Produit introuvable.");
-    }
+  // Met à jour la notification du panier
+  updateCartNotification();
 }
 
   function updateCartNotification() {
