@@ -5,49 +5,107 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Détails du Produit</title>
   <style>
-    /* Base CSS */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-}
-
+/* Barre de Navigation */
 header {
-  background-color: #333;
-  padding: 10px;
-  color: white;
+    background-color: #fff;
+    padding: 0.5em 1em;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    margin-top: 40px;
 }
 
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
 }
 
-.navbar a {
-  color: white;
-  text-decoration: none;
-  margin-right: 15px;
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
 }
 
-.navbar a:hover {
-  color: #f39c12;
+.logo img {
+    height: 40px; /* Ajuste la taille selon tes préférences */
 }
+
 
 .hamburger {
-  display: none;
-  cursor: pointer;
-  font-size: 30px;
+    font-size: 1.5em;
+    cursor: pointer;
+    display: none;
+    color: #688F4E;
+    
 }
 
-#nav-links {
-  display: flex;
+nav {
+    display: flex;
+    gap: 1.5em;
 }
 
-#nav-links a {
-  margin-right: 20px;
-  font-weight: bold;
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Menu Hamburger pour Mobile */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #2B463C;
+        width: 100%;
+        padding: 1em 0;
+    }
+
+    nav a {
+        padding: 0.5em 1em;
+        text-align: center;
+        display: block;
+    }
+
+    nav.active {
+        display: flex;
+    }
+}
+
+
+/* Global Styles */
+body {
+    font-family: Sifonn;
+    color: #000;
+    margin: 0;
+    padding: 0;
+    background-color: #fff
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+}
+
+h2, h3 {
+    color: #688F4E;
+    text-align: center;
+    margin-top: 0;
+}
+
+p {
+    text-align: center;
 }
 
 #product-details {
