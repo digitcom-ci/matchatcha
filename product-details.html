@@ -177,14 +177,15 @@
 
       if (product) {
         const productContainer = document.getElementById("product-container");
-        const productHTML = 
-          <img src="${product.image}" alt="${product.name}">
-          <h1>${product.name}</h1>
-          <p>${product.description}</p>
-          <p><strong>Prix:</strong> ${product.price} ${currency}</p>
-          <p><strong>Détails:</strong> ${product.details}</p>
-          <p><strong>Conditionnement:</strong> ${product.container}</p>
-        ;
+        const productHTML = `
+           <img src="${product.image}" alt="${product.name}">
+           <h1>${product.name}</h1>
+           <p>${product.description}</p>
+           <p><strong>Prix:</strong> ${product.price} ${currency}</p>
+           <p><strong>Détails:</strong> ${product.details}</p>
+           <p><strong>Conditionnement:</strong> ${product.container}</p>
+           `;
+
         productContainer.innerHTML = productHTML;
 
         const variantSelect = document.getElementById("variant");
@@ -218,15 +219,16 @@
       relatedProductsContainer.innerHTML = '';
 
       relatedProducts.forEach(product => {
-        const productHTML = 
-          <div class="related-product">
-            <img src="${product.image}" alt="${product.name}">
-            <h4>${product.name}</h4>
-            <p>${product.description}</p>
-            <p><strong>Prix:</strong> ${product.price} ${currency}</p>
-            <a href="product-details.html?id=${product.id}" class="view-details">Voir le produit</a>
-          </div>
-        ;
+      const productHTML = `
+        <div class="related-product">
+          <img src="${product.image}" alt="${product.name}">
+          <h4>${product.name}</h4>
+          <p>${product.description}</p>
+          <p><strong>Prix:</strong> ${product.price} ${currency}</p>
+          <a href="product-details.html?id=${product.id}" class="view-details">Voir le produit</a>
+        </div>
+        `;
+
         relatedProductsContainer.innerHTML += productHTML;
       });
     }
