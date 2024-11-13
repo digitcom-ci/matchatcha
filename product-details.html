@@ -572,43 +572,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
 function addToCart() {
-  const variant = document.getElementById("variant").value;
-  const quantity = parseInt(document.getElementById("quantity").value);
+  const variantSelect = document.getElementById('variant');
+  const quantitySelect = document.getElementById('quantity');
+  const variant = variantSelect.value;
+  const quantity = parseInt(quantitySelect.value);
+  
+  const productId = getProductIdFromURL ();
+  const product = products.find(p => p.id === parsInt(productId));
 
-  if (!variant || quantity <= 0) {
-    alert("Veuillez sélectionner une variante et une quantité valide.");
-    return;
-  }
-
-  const productName = document.querySelector("#product-container h1").textContent;
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  // Vérifie si l'article existe déjà dans le panier
-  const existingItem = cart.find(item => item.name === productName && item.variant === variant);
-
-  if (existingItem) {
-    existingItem.quantity += quantity;
-  } else {
-    cart.push({
-      name: productName,
+  if (product) {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartItem = {
+      id: product.id,
+      name: product.name,
       variant: variant,
-      quantity: quantity,
-    });
+      price: product.price,
+      quantity: quantity
+    };
+    
+    cart.push(cartItem);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    document.getElementById('message').style.display= 'block';
+    updateCartNotification();
   }
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-
-  // Affiche un message de confirmation
-  const message = document.getElementById("message");
-  message.style.display = "block";
-  message.textContent = "Produit ajouté au panier !";
-
-  setTimeout(() => {
-    message.style.display = "none";
-  }, 3000);
-
-  // Met à jour la notification du panier
-  updateCartNotification();
 }
 
   function updateCartNotification() {
