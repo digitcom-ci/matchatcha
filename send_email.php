@@ -16,7 +16,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $city = htmlspecialchars($_POST["city"]);
     $address = htmlspecialchars($_POST["address"]);
     $deliveryFee = htmlspecialchars($_POST["deliveryFee"]);
-    $cartItems = json_decode($_POST["cartItems"], true);
+    
+    // Vérifier et décoder les articles du panier
+    $cartItems = isset($_POST["cartItems"]) ? json_decode($_POST["cartItems"], true) : [];
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        echo json_encode(["status" => "error", "message" => "Erreur dans les données du panier : " . json_last_error_msg()]);
+        exit;
+    }
+
+    // Vérifier l'email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo json_encode(["status" => "error", "message" => "Adresse email invalide."]);
+        exit;
+    }
 
     // Contenu de l'email
     $subject = "Nouvelle commande de $firstName $lastName";
@@ -47,16 +59,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {
         // Paramètres du serveur SMTP
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com'; // Exemple pour Gmail
+        $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'matchatcha.ci@gmail.com'; // Remplacez par votre adresse email
-        $mail->Password = 'MAtchatcha225'; // Remplacez par votre mot de passe
+        $mail->Username = 'matchatcha.ci@gmail.com'; // Adresse email
+        $mail->Password = 'MAtchatcha225'; // Mot de passe
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
         // Destinataire
         $mail->setFrom('matchatcha.ci@gmail.com', 'matchatcha');
-        $mail->addAddress('matchatcha.ci@gmail.com');
+        $mail->addAddress('dd.somanager@gmail.com'); // Adresse de destination
 
         // Contenu de l'email
         $mail->isHTML(true);
@@ -67,7 +79,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mail->send();
         echo json_encode(["status" => "success", "message" => "Commande envoyée avec succès !"]);
     } catch (Exception $e) {
-        echo json_encode(["status" => "error", "message" => "Erreur lors de l'envoi : {$mail->ErrorInfo}"]);
+        error_log("Erreur PHPMailer : {$mail->ErrorInfo}");
+        echo json_encode(["status" => "error", "message" => "Impossible d'envoyer l'email : {$mail->ErrorInfo}"]);
     }
     exit;
 }
