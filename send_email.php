@@ -49,14 +49,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com'; // Exemple pour Gmail
         $mail->SMTPAuth = true;
-        $mail->Username = 'votre_email@gmail.com'; // Remplacez par votre adresse email
-        $mail->Password = 'votre_mot_de_passe'; // Remplacez par votre mot de passe
+        $mail->Username = 'matchatcha.ci@gmail.com'; // Remplacez par votre adresse email
+        $mail->Password = 'MAtchatcha225'; // Remplacez par votre mot de passe
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
         // Destinataire
-        $mail->setFrom('votre_email@gmail.com', 'Nom de votre site');
-        $mail->addAddress('dd.somanager@gmail.com');
+        $mail->setFrom('matchatcha.ci@gmail.com', 'matchatcha');
+        $mail->addAddress('matchatcha.ci@gmail.com');
 
         // Contenu de l'email
         $mail->isHTML(true);
