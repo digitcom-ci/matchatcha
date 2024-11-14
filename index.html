@@ -158,7 +158,7 @@
             }
             updateCartNotification();
 
-            // Fonction pour gérer le clic sur l'icône de connexion
+// Fonction pour gérer le clic sur l'icône de connexion
             function handleLoginClick() {
                 const isLoggedIn = localStorage.getItem('loggedInUser');
                 if (isLoggedIn) {
@@ -178,6 +178,7 @@
                 window.location.href = 'index.html';
             }
         });
+        
         const announcementText = document.getElementById('announcement-text'); 
         let position = window.innerWidth; // Position initiale du texte (hors de l'écran) 
         const speed = 2; // Vitesse du défilement 
