@@ -201,6 +201,38 @@
             })
             .catch(error => alert("Erreur lors de l'envoi : " + error));
         });
+        document.getElementById("order-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Récupérer les articles du panier
+    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const formData = new FormData();
+    formData.append("firstName", document.getElementById("first-name").value);
+    formData.append("lastName", document.getElementById("last-name").value);
+    formData.append("email", document.getElementById("email").value);
+    formData.append("phone", document.getElementById("phone").value);
+    formData.append("city", document.getElementById("city").value);
+    formData.append("address", document.getElementById("address").value);
+    formData.append("deliveryFee", deliveryFees[document.getElementById("city").value]);
+    formData.append("cartItems", JSON.stringify(cartItems));
+
+    fetch("send_email.php", {
+        method: "POST",
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            document.getElementById("order-form").style.display = "none";
+            document.getElementById("order-summary").style.display = "block";
+        } else {
+            alert("Erreur : " + data.message);
+        }
+    })
+    .catch(error => alert("Erreur lors de l'envoi : " + error));
+});
+
     </script>
 
 </body>
