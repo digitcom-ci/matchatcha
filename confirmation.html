@@ -201,10 +201,10 @@
             })
             .catch(error => alert("Erreur lors de l'envoi : " + error));
         });
-        document.getElementById("order-form").addEventListener("submit", function (e) {
+
+document.getElementById("order-form").addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // Récupérer les articles du panier
     const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
 
     const formData = new FormData();
@@ -232,6 +232,7 @@
     })
     .catch(error => alert("Erreur lors de l'envoi : " + error));
 });
+
 
     </script>
 
