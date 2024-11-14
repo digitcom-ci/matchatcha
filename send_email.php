@@ -1,4 +1,12 @@
 <?php
+// Inclure PHPMailer
+require 'libs/PHPMailer/PHPMailer.php';
+require 'libs/PHPMailer/SMTP.php';
+require 'libs/PHPMailer/Exception.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Récupérer les données du formulaire
     $firstName = htmlspecialchars($_POST["firstName"]);
@@ -8,14 +16,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $city = htmlspecialchars($_POST["city"]);
     $address = htmlspecialchars($_POST["address"]);
     $deliveryFee = htmlspecialchars($_POST["deliveryFee"]);
-
-    // Récupérer le panier de l'utilisateur (localStorage converti en tableau JSON côté client)
     $cartItems = json_decode($_POST["cartItems"], true);
 
-    // Construire le contenu de l'e-mail
+    // Contenu de l'email
     $subject = "Nouvelle commande de $firstName $lastName";
-    $to = "dd.somanager@gmail.com";
-
     $message = "<h2>Nouvelle commande</h2>";
     $message .= "<p><strong>Nom :</strong> $firstName $lastName</p>";
     $message .= "<p><strong>Email :</strong> $email</p>";
@@ -37,16 +41,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $message .= "<p>Le panier est vide.</p>";
     }
 
-    // Entêtes de l'e-mail
-    $headers = "From: no-reply@tonsite.com\r\n";
-    $headers .= "Reply-To: $email\r\n";
-    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+    // Configurer PHPMailer
+    $mail = new PHPMailer(true);
 
-    // Envoi de l'e-mail
-    if (mail($to, $subject, $message, $headers)) {
+    try {
+        // Paramètres du serveur SMTP
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; // Exemple pour Gmail
+        $mail->SMTPAuth = true;
+        $mail->Username = 'votre_email@gmail.com'; // Remplacez par votre adresse email
+        $mail->Password = 'votre_mot_de_passe'; // Remplacez par votre mot de passe
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        // Destinataire
+        $mail->setFrom('votre_email@gmail.com', 'Nom de votre site');
+        $mail->addAddress('dd.somanager@gmail.com');
+
+        // Contenu de l'email
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body = $message;
+
+        // Envoyer l'email
+        $mail->send();
         echo json_encode(["status" => "success", "message" => "Commande envoyée avec succès !"]);
-    } else {
-        echo json_encode(["status" => "error", "message" => "Une erreur s'est produite lors de l'envoi de l'e-mail."]);
+    } catch (Exception $e) {
+        echo json_encode(["status" => "error", "message" => "Erreur lors de l'envoi : {$mail->ErrorInfo}"]);
     }
     exit;
 }
