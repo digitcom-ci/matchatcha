@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de Commande</title>
+    <style>
+        /* Style général */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Corps de la page */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        /* Conteneur principal */
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Titre */
+        h2 {
+            font-size: 1.5rem;
+            color: #688F4E;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Style des labels et champs de saisie */
+        label {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* Textarea */
+        textarea {
+            resize: vertical;
+            height: 80px;
+        }
+
+        /* Bouton de confirmation */
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            background-color: #688F4E;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2b463c;
+        }
+
+        /* Résumé de la commande */
+        #order-summary {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        #order-summary p {
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        /* Détails du panier */
+        .order-items {
+            text-align: left;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .order-items img {
+            max-width: 50px;
+            margin-right: 10px;
+        }
+
+        .order-items .item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        /* Bouton Retour */
+        .button {
+            margin-top: 1.5rem;
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            background-color: #688F4E;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #2b463c;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Confirmation de Commande</h2>
+
+    <div class="container">
+    <form id="order-form">
+        <label for="first-name">Nom:</label>
+        <input type="text" id="first-name" name="firstName" required>
+
+        <label for="last-name">Prénom:</label>
+        <input type="text" id="last-name" name="lastName" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Numéro de Téléphone:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="country">Pays:</label>
+        <input type="text" id="country" name="country" value="Côte d'Ivoire" readonly>
+
+        <label for="city">Ville:</label>
+        <select id="city" name="city" required>
+            <option value="Abidjan Sud">Abidjan Sud - 1500 FCFA</option>
+            <option value="Abidjan Nord">Abidjan Nord - 1000 FCFA</option>
+            <option value="Bassam">Bassam - 2000 FCFA</option>
+            <option value="Bonoua">Bonoua - 3000 FCFA</option>
+            <option value="Aboisso">Aboisso - 5000 FCFA</option>
+            <option value="Assinie">Assinie - 3000 FCFA</option>
+            <option value="Yamoussoukro">Yamoussoukro - 3000 FCFA</option>
+            <option value="Bouaké">Bouaké - 5000 FCFA</option>
+        </select>
+
+        <label for="address">Adresse complète:</label>
+        <textarea id="address" name="address" required></textarea>
+
+        <button type="submit">Confirmer ma commande</button>
+    </form>
+    </div>
+
+    <div id="order-summary" style="display:none;">
+        <h2>Merci pour votre commande !</h2>
+        <p>Votre commande a été confirmée avec succès.</p>
+        <p>Nous vous enverrons un email de confirmation avec les détails de votre commande dans quelques minutes.</p>
+        <p>Si vous avez des questions, n'hésitez pas à nous contacter.</p>
+
+        <div class="order-items">
+            <h3>Détails de votre panier :</h3>
+            <div id="cart-items-list"></div>
+        </div>
+
+        <button onclick="window.location.href='index.html'">Retourner à l'accueil</button>
+    </div>
+
+    <script>
+        const deliveryFees = {
+            "Abidjan Sud": 1500,
+            "Abidjan Nord": 1000,
+            "Bassam": 2000,
+            "Bonoua": 3000,
+            "Aboisso": 5000,
+            "Assinie": 3000,
+            "Yamoussoukro": 3000,
+            "Bouaké": 5000,
+        };
+
+        document.getElementById("order-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+            const orderData = {
+                firstName: document.getElementById("first-name").value,
+                lastName: document.getElementById("last-name").value,
+                email: document.getElementById("email").value,
+                phone: document.getElementById("phone").value,
+                city: document.getElementById("city").value,
+                address: document.getElementById("address").value,
+                deliveryFee: deliveryFees[document.getElementById("city").value],
+                cartItems: cartItems,
+            };
+
+            // Sauvegarder la commande dans localStorage (ou envoyer au backend)
+            const orders = JSON.parse(localStorage.getItem("orders")) || [];
+            orders.push(orderData);
+            localStorage.setItem("orders", JSON.stringify(orders));
+
+            // Vider le panier après confirmation
+            localStorage.removeItem("cart");
+
+            // Afficher un résumé avec le panier
+            document.getElementById("order-form").style.display = "none";
+            document.getElementById("order-summary").style.display = "block";
+
+            // Remplir les détails du panier
+            const cartItemsList = document.getElementById("cart-items-list");
+            let totalAmount = 0;
+            cartItems.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                totalAmount += itemTotal;
+
+                const itemDiv = document.createElement("div");
+                itemDiv.classList.add("item");
+                itemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" />
+                    <div>
+                        <p><strong>${item.name}</strong> x${item.quantity} - ${item.price} FCFA</p>
+                        <p>Total: ${itemTotal} FCFA</p>
+                    </div>
+                `;
+                cartItemsList.appendChild(itemDiv);
+            });
+
+            const deliveryTotal = orderData.deliveryFee;
+            const finalTotal = totalAmount + deliveryTotal;
+            const deliveryDiv = document.createElement("div");
+            deliveryDiv.innerHTML = `
+                <h4>Frais de livraison: ${deliveryTotal} FCFA</h4>
+                <h4>Total de la commande: ${finalTotal} FCFA</h4>
+            `;
+            cartItemsList.appendChild(deliveryDiv);
+        });
+    </script>
+
+</body>
+</html>

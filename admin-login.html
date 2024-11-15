@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion Administrateur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f4f4f9;
+            margin: 0;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            width: 100%;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        input[type="password"], button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #2b463c;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #688F4E;
+        }
+    </style>
+</head>
+<body>
+    <h1>Connexion Administrateur</h1>
+    <form id="login-form">
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" placeholder="Entrez le mot de passe" required>
+        <button type="submit">Se connecter</button>
+    </form>
+
+    <script>
+        const form = document.getElementById("login-form");
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const password = document.getElementById("password").value;
+
+            // Vérifiez le mot de passe (simple comparaison)
+            if (password === "admin123") {
+                // Redirige vers la page administrateur
+                window.location.href = "admin.html";
+            } else {
+                alert("Mot de passe incorrect !");
+            }
+        });
+    </script>
+</body>
+</html>

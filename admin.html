@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Administrateur</title>
+    <style>
+        /* Style général */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f4f4f9;
+        }
+
+        /* Barre de navigation */
+        nav {
+            background-color: #2b463c;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contenu principal */
+        .section {
+            display: none;
+            padding: 2rem;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* Styles spécifiques */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Boutons */
+        .action-buttons {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .action-buttons button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .action-buttons button.deliver {
+            background-color: green;
+            color: white;
+        }
+
+        .action-buttons button.cancel {
+            background-color: red;
+            color: white;
+        }
+
+        .action-buttons button.delete {
+            background-color: grey;
+            color: white;
+        }
+
+        /* Styles pour les états */
+        .delivered {
+            background-color: #d4edda; /* Vert clair */
+        }
+
+        .cancelled {
+            background-color: #f8d7da; /* Rouge clair */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barre de navigation -->
+    <nav>
+        <h2> Commande </h2>
+    </nav>
+
+    <!-- Section des commandes -->
+    <section id="orders" class="section active">
+        <h2>Commandes</h2>
+        <div class="cards" id="order-cards">
+            <!-- Les cartes de commandes seront ajoutées ici dynamiquement -->
+        </div>
+    </section>
+
+    <script>
+        // Afficher la section correspondante
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+                if (section.id === sectionId) {
+                    section.classList.add('active');
+                }
+            });
+        }
+
+        // Simuler des commandes reçues
+        const orders = [
+            {
+                id: 1,
+                name: "Jean Dupont",
+                email: "jean.dupont@example.com",
+                phone: "0123456789",
+                city: "Abidjan Sud",
+                address: "Cocody, Rue des palmiers",
+                deliveryFee: 1500,
+                items: [
+                    { name: "Produit A", variant: "Rouge", quantity: 2 },
+                    { name: "Produit B", variant: "XL", quantity: 1 }
+                ],
+                status: "pending" // États possibles: pending, delivered, cancelled
+            },
+            {
+                id: 2,
+                name: "Marie Curie",
+                email: "marie.curie@example.com",
+                phone: "0987654321",
+                city: "Bassam",
+                address: "Quartier des pêcheurs",
+                deliveryFee: 2000,
+                items: [
+                    { name: "Produit C", variant: "Bleu", quantity: 3 }
+                ],
+                status: "pending"
+            }
+        ];
+
+        // Afficher les commandes
+        function displayOrders() {
+            const orderCards = document.getElementById('order-cards');
+            const orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+            orderCards.innerHTML = ""; // Vider la liste avant d'ajouter les commandes
+
+            orders.forEach((order, index) => {
+                const card = document.createElement('div');
+                card.className = 'card ' + (order.status === 'delivered' ? 'delivered' : order.status === 'cancelled' ? 'cancelled' : '');
+                card.innerHTML = `
+                    <h3>Commande #${index + 1}</h3>
+                    <p><strong>Nom :</strong> ${order.firstName} ${order.lastName}</p>
+                    <p><strong>Email :</strong> ${order.email}</p>
+                    <p><strong>Téléphone :</strong> ${order.phone}</p>
+                    <p><strong>Ville :</strong> ${order.city}</p>
+                    <p><strong>Adresse :</strong> ${order.address}</p>
+                    <p><strong>Frais de livraison :</strong> ${order.deliveryFee} FCFA</p>
+                    <h4>Articles commandés :</h4>
+                    <ul>
+                        ${order.cartItems.map(item => `<li>${item.name} (${item.variant}) x${item.quantity}</li>`).join('')}
+                    </ul>
+                    <div class="action-buttons">
+                        <button class="deliver" onclick="updateStatus(${order.id}, 'delivered')">Livrer</button>
+                        <button class="cancel" onclick="updateStatus(${order.id}, 'cancelled')">Annuler</button>
+                        <button class="delete" onclick="deleteOrder(${order.id})">Supprimer</button>
+                    </div>
+                `;
+                orderCards.appendChild(card);
+            });
+        }
+
+        // Mettre à jour l'état d'une commande
+        function updateStatus(orderId, status) {
+            const orders = JSON.parse(localStorage.getItem("orders"));
+            const order = orders.find(o => o.id === orderId);
+            if (order) {
+                order.status = status;
+                localStorage.setItem("orders", JSON.stringify(orders));
+                displayOrders();
+            }
+        }
+
+        // Supprimer une commande
+        function deleteOrder(orderId) {
+            let orders = JSON.parse(localStorage.getItem("orders"));
+            orders = orders.filter(o => o.id !== orderId);
+            localStorage.setItem("orders", JSON.stringify(orders));
+            displayOrders();
+        }
+
+        // Charger les commandes au démarrage
+        window.addEventListener("load", displayOrders);
+    </script>
+</body>
+</html>
